@@ -2,7 +2,7 @@ package milk.inhand.com.inhandmilk.activity;
 
 /**
  * LogRegActivity
- * Desc:
+ * Desc:登陆注册Activity
  * Team: InHand
  * User:Wooxxx
  * Date: 2015-03-03
