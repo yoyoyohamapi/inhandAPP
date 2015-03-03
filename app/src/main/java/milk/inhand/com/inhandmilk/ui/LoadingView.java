@@ -86,7 +86,8 @@ public class LoadingView extends LinearLayout {
 
 
     /**
-     *
+     * LoadingTask
+     * Desc:加载动画播放时执行的任务类
      */
     public class LoadingTask extends AsyncTask {
         private AnimationDrawable anim;
@@ -123,7 +124,6 @@ public class LoadingView extends LinearLayout {
     /**
      * LoadingCallBack
      * Desc:加载动画回调接口
-     * Date
      */
     public static interface LoadingCallback{
         public void doInBackground();
