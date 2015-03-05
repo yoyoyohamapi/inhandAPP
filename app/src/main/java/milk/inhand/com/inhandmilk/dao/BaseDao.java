@@ -1,31 +1,31 @@
 package milk.inhand.com.inhandmilk.dao;
 
-import android.content.Context;
-
-import java.util.ArrayList;
-
-import milk.inhand.com.inhandmilk.helper.DatabaseHelper;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.FindCallback;
 
 /**
  * BaseDao
- * Desc:
+ * Desc:基础Dao类
  * Team: InHand
  * User:Wooxxx
- * Date: 2015-03-03
- * Time: 16:11
+ * Date: 2015-03-04
+ * Time: 21:24
  */
-public abstract class BaseDao {
-    protected Context ctx;
-    protected DatabaseHelper dbHelper;
+public class BaseDao {
 
-    public BaseDao(Context ctx) {
-        this.ctx = ctx;
-        this.dbHelper = new DatabaseHelper(ctx);
+    /**
+     *
+     * @return
+     */
+    public AVObject findByObjectId(String objectId){
+       return null;
     }
 
     /**
-     * 返回所有数据对象
-     * @return 数据对象列表
+     * @param limit 最大数量，如果为0，代表传入所有
+     * @param findCallback 查询完后的回调函数
      */
-    public abstract ArrayList findAll();
+    public void findAllOrLimit(int limit,FindCallback findCallback){
+
+    }
 }
