@@ -22,7 +22,7 @@ import java.util.List;
  */
 @AVClassName(OneDay.ONEDAY_CLASS)
 public class OneDay extends AVObject{
-    static final String ONEDAY_CLASS = "OneDay";
+    static final String ONEDAY_CLASS = "Milk_OneDay";
     private static final String VOLUME_KEY = "volume";
     private static final String RECORDS_KEY = "records";
     private static final String DATE_KEY = "date";

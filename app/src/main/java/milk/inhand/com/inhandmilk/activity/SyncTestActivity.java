@@ -65,14 +65,16 @@ public class SyncTestActivity extends BaseActivity{
         oneDao.findAllOrLimit(0, new FindCallback() {
             @Override
             public void done(List list, AVException e) {
-                oneDays = list;
-                List<Record> records = oneDays.get(0).getRecords();
-                System.out.println("Size:"+records.size());
-                RecordAdapter adapter = new RecordAdapter(
-                        SyncTestActivity.this,
-                        R.layout.item_sync_test,
-                        records);
-                listView.setAdapter(adapter);
+                if( e == null ) {
+                    oneDays = list;
+                    List<Record> records = oneDays.get(0).getRecords();
+                    System.out.println("Size:" + records.size());
+                    RecordAdapter adapter = new RecordAdapter(
+                            SyncTestActivity.this,
+                            R.layout.item_sync_test,
+                            records);
+                    listView.setAdapter(adapter);
+                }
             }
         });
     }
