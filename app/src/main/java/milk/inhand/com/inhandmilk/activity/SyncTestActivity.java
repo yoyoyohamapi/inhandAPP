@@ -22,6 +22,7 @@ import milk.inhand.com.inhandmilk.R;
 import milk.inhand.com.inhandmilk.dao.OneDayDao;
 import milk.inhand.com.inhandmilk.entity.OneDay;
 import milk.inhand.com.inhandmilk.entity.Record;
+import milk.inhand.com.inhandmilk.utils.ViewHolder;
 
 /**
  * SyncTestActivity
@@ -136,25 +137,19 @@ public class SyncTestActivity extends BaseActivity{
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             Record record = getItem(position);
-            View rootView = convertView;
-            final ViewHolder holder;
             if( convertView==null ) {
-                rootView = LayoutInflater.from(context)
+                convertView = LayoutInflater.from(context)
                         .inflate(resId, parent, false);
-                holder = new ViewHolder();
-                holder.durationTxt = (TextView) rootView.findViewById(R.id.duration_text);
-                holder.minTmpTxt = (TextView) rootView.findViewById(R.id.min_temperature_text);
-                holder.maxTmpTxt = (TextView) rootView.findViewById(R.id.max_temperature_text);
-                holder.volumeTxt = (TextView) rootView.findViewById(R.id.volume_text);
-                rootView.setTag(holder);
-            }else{
-                holder = (ViewHolder)rootView.getTag();
             }
-            holder.durationTxt.setText(String.valueOf(record.getDuration()));
-            holder.minTmpTxt.setText(String.valueOf(record.getMinTemperature()));
-            holder.maxTmpTxt.setText(String.valueOf(record.getMaxTemperature()));
-            holder.volumeTxt.setText(String.valueOf(record.getVolume()));
-            return rootView;
+            TextView durationTxt = ViewHolder.get(convertView, R.id.duration_text);
+            TextView minTmpTxt = ViewHolder.get(convertView,R.id.min_temperature_text);
+            TextView maxTmpTxt = ViewHolder.get(convertView,R.id.max_temperature_text);
+            TextView volumeTxt = ViewHolder.get(convertView,R.id.volume_text);
+            durationTxt.setText(String.valueOf(record.getDuration()));
+            minTmpTxt.setText(String.valueOf(record.getMinTemperature()));
+            maxTmpTxt.setText(String.valueOf(record.getMaxTemperature()));
+            volumeTxt.setText(String.valueOf(record.getVolume()));
+            return convertView;
         }
 
         @Override
@@ -172,13 +167,6 @@ public class SyncTestActivity extends BaseActivity{
             return records.size();
         }
 
-    }
-
-    static class ViewHolder{
-        TextView durationTxt;
-        TextView minTmpTxt;
-        TextView maxTmpTxt;
-        TextView volumeTxt;
     }
 
 }
