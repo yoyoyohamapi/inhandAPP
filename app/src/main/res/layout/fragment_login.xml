@@ -1,6 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/login_container"
+    style="@style/login_container">
 
+    <ImageView
+        android:id="@+id/login_logo"
+        style="@style/login_logo" />
+
+    <EditText
+        android:id="@+id/login_name"
+        style="@style/login_form"
+        android:inputType="phone"
+        android:hint="@string/login_name_hint" />
+
+    <EditText
+        android:id="@+id/login_pwd"
+        style="@style/login_form"
+        android:inputType="textPassword"
+        android:hint="@string/login_pwd_hint" />
+
+    <Button
+        android:id="@+id/login_submit"
+        style="@style/login_submit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:text="@string/login" />
+
+    <RelativeLayout
+        android:id="@+id/login_opr"
+        style="@style/login_opr_container">
+
+        <TextView
+            android:id="@+id/register"
+            style="@style/login_opr"
+            android:text="@string/login_to_reg"
+            android:clickable="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/forget_pwd"
+            style="@style/login_opr"
+            android:text="@string/login_forget_pwd"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/login_app_tip"
+        style="@style/login_app_tip">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView style="@style/login_tip_line" />
+
+            <TextView style="@style/login_tip_text" />
+
+            <TextView style="@style/login_tip_line" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/app_list"
+        style="@style/app_list">
+
+        <ImageView
+            android:id="@+id/app_sina"
+            style="@style/app_icon"
+            android:src="@drawable/app_sina" />
+
+        <ImageView
+            android:id="@+id/app_qq"
+            style="@style/app_icon"
+            android:src="@drawable/app_qq" />
+
+        <ImageView
+            android:id="@+id/app_weixin"
+            style="@style/app_icon"
+            android:src="@drawable/app_weixin" />
+    </LinearLayout>
 </LinearLayout>
