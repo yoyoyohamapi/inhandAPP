@@ -1,4 +1,4 @@
-package milk.inhand.com.milk;
+package com.inhand.milk;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
