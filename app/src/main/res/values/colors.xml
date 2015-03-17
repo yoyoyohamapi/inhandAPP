@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ************************默认部分********************************* -->
+    <!--基本前景色-->
+    <color name="default_ftg">#ffffff</color>
+    <!--基本背景色-->
+    <color name="default_bkg">#03ADAC</color>
+    <!--基本字色-->
+    <color name="default_font">#ffffff</color>
+    <!--基本边框色-->
+    <color name="default_border">#ffffff</color>
+    <!--默认按钮按下色-->
+    <color name="default_btn_clicked">#ff009bad</color>
+    <!--表单输入框背景色-->
+    <color name="login_form_bkg">#ffffff</color>
+
+    <!-- ************************登陆部分********************************* -->
+    <!--登陆提示字-->
+    <color name="login_tip">#e0ffffff</color>
+    <!--登陆分界线-->
+    <color name="login_divide">#62ffffff</color>
+    <!-- ************************Health部分********************************* -->
+    <color name="health_list_divider">#ffc8c8c8</color>
+</resources>

@@ -21,7 +21,6 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textColor">@color/default_font</item>
-        <item name="android:textSize">@dimen/top_bar_title</item>
     </style>
 
     <style name="footer_button">
@@ -32,7 +31,6 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textColor">@color/default_font</item>
-        <item name="android:textSize">@dimen/top_bar_title</item>
     </style>
 
     <style name="form_input">
@@ -46,6 +44,30 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/default_ftg</item>
         <item name="android:textStyle">bold</item>
+    </style>
+    <!--SlidingMenu-->
+    <style name="slidingmenu">
+        <item name="android:paddingStart">@dimen/sliding_padding</item>
+        <item name="android:paddingEnd">@dimen/sliding_padding</item>
+        <item name="android:paddingTop">@dimen/sliding_paddingTop</item>
+        <item name="android:paddingBottom">@dimen/sliding_paddingBottom</item>
+        <item name="android:background">@drawable/common_sliding_bkg</item>
+    </style>
+
+    <style name="sliding_avatar"></style>
+
+    <style name="sliding_username">
+        <item name="android:textColor">@color/default_ftg</item>
+        <item name="android:textSize">@dimen/sliding_username_fontSize</item>
+    </style>
+
+    <style name="sliding_otherinfo">
+        <item name="android:textColor">@color/default_ftg</item>
+        <item name="android:textSize">@dimen/sliding_otherinfo_fontSize</item>
+    </style>
+
+    <style name="sliding_list">
+
     </style>
     <!--登陆界面样式-->
     <style name="login_container">

@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Date: 2015-03-03
  * Time: 15:55
  */
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
     //数据库名
     private static final String DB_NAME = "inhand_milk.db";
     //版本维护
@@ -28,7 +28,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "album"
     };
 
-    public DatabaseHelper(Context context) {
+    private static DBHelper instance = null;
+
+    //双重检查加锁实例化单例
+    public static DBHelper getInstance(Context ctx) {
+        if (instance == null) {//第一次检查
+            synchronized (DBHelper.class) {
+                if (instance == null) {
+                    instance = new DBHelper(ctx);
+                }
+            }
+        }
+        return instance;
+    }
+
+    private DBHelper(Context context) {
         super(context, DB_NAME, null, version);
     }
 

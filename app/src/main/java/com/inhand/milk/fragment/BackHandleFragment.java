@@ -10,7 +10,7 @@ import android.os.Bundle;
  * Date: 2015-03-03
  * Time: 12:43
  */
-public abstract class BackHandleFragment extends BaseFragement {
+public abstract class BackHandleFragment extends BaseFragment {
     /**
      * BackHandledInterface
      * 该接口用于告知宿主Activity当前fragment

@@ -1,0 +1,29 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            class="com.inhand.milk.fragment.HeaderFragment"
+            android:id="@+id/header_fragment"
+            android:name="com.inhand.milk.fragment.HeaderFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <fragment
+            android:id="@+id/main_fragment"
+            android:name="com.inhand.milk.fragment.VolumeFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/header_fragment" />
+    </RelativeLayout>
+
+    <fragment
+        android:name="com.inhand.milk.fragment.FooterFragment"
+        android:id="@+id/footer_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</FrameLayout>

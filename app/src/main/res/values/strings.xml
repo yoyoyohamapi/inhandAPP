@@ -3,6 +3,14 @@
     <!--默认-->
     <string name="login">登录</string>
     <string name="register">注册</string>
+    <string name="settings">设置</string>
+    <string name="skin">皮肤</string>
+    <!--各个Fragment标题-->
+    <string name="fragment_title_volume">奶量统计</string>
+    <string name="fragment_title_temperature">温度统计</string>
+    <string name="fragment_title_home">综合评分</string>
+    <string name="fragment_title_statistics">健康数据</string>
+    <string name="fragment_title_babyinfo">宝宝信息</string>
     <!--登陆部分-->
     <string name="login_divide_tip">第三方登录</string>
     <string name="login_name_hint">输入您的手机号</string>
@@ -31,4 +39,10 @@
     <string name="pwd_mismatch">两次输入密码不一致</string>
     <string name="family_name_hint">输入您的家庭名称(如：阳阳一家)</string>
     <string name="family_name_error">输入您的家庭名称(如：阳阳一家)</string>
+    <!--Sliding 菜单项-->
+    <string name="sliding_list_device">我的设备</string>
+    <string name="sliding_list_settings">奶瓶设置</string>
+    <string name="sliding_list_family">家庭成员</string>
+    <string name="sliding_list_advice">建议反馈</string>
+
 </resources>

@@ -1,11 +1,12 @@
 package com.inhand.milk.fragment;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,7 @@ public class LoginFragment extends BackHandleFragment {
 
     //   跳转到注册页面
     private void redirectToReg() {
-        FragmentManager fm = getActivity().getFragmentManager();
+        FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.addToBackStack(null);
         ft.replace(R.id.main_container, new RegisterFragment());
