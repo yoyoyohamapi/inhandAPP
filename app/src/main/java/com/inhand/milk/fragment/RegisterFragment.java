@@ -24,7 +24,8 @@ import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.RequestMobileCodeCallback;
 import com.avos.avoscloud.SignUpCallback;
 import com.inhand.milk.R;
-import com.inhand.milk.activity.SyncTestActivity;
+import com.inhand.milk.activity.LogRegActivity;
+import com.inhand.milk.entity.User;
 import com.inhand.milk.utils.Validator;
 
 import java.util.List;
@@ -45,7 +46,7 @@ public class RegisterFragment extends BackHandleFragment {
     private EditText vcEditor;
     private Button nextBtn;
     private Button getVCBtn;
-    private AVUser user = null;
+    private User user = null;
     private TimeCount timer;
     private ViewFlipper flipper;
     private EditText firstPwd;
@@ -206,7 +207,7 @@ public class RegisterFragment extends BackHandleFragment {
                 @Override
                 public void done(AVException e) {
                     if (e == null) {
-                        user = new AVUser();
+                        user = new User();
                         user.setUsername(phoneNumber);
                         user.setMobilePhoneNumber(phoneNumber);
                         timer.cancel();
@@ -252,7 +253,7 @@ public class RegisterFragment extends BackHandleFragment {
                     if (e == null) {
                         //注册成功
                         Intent intent = new Intent();
-                        intent.setClass(getActivity(), SyncTestActivity.class);
+                        intent.setClass(getActivity(), LogRegActivity.class);
                         startActivity(intent);
                     } else {
                         e.printStackTrace();

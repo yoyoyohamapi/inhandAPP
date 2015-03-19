@@ -26,15 +26,9 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FragmentManager fm = getSupportFragmentManager();
-//        fm.beginTransaction()
-//                .replace(R.id.header_fragment, new HeaderFragment(),"Header")
-//                .replace(R.id.main_fragment, new VolumeFragment(),"Main")
-//                .replace(R.id.footer_fragment,new FooterFragment(),"Footer")
-//                .commit();
 
         header = (HeaderFragment) fm.findFragmentById(R.id.header_fragment);
         main = (MainFragment) fm.findFragmentById(R.id.main_fragment);
-
     }
 
 

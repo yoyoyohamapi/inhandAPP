@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
+import com.inhand.milk.entity.Baby;
+import com.inhand.milk.entity.KeyPoint;
 import com.inhand.milk.entity.OneDay;
 
 /**
@@ -29,6 +31,8 @@ public class LeanCloudHelper {
 
     private static void registerSubclass() {
         AVObject.registerSubclass(OneDay.class);
+        AVObject.registerSubclass(Baby.class);
+        AVObject.registerSubclass(KeyPoint.class);
     }
 
     /**

@@ -18,7 +18,8 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.LogInCallback;
 import com.inhand.milk.R;
-import com.inhand.milk.activity.BaseActivity;
+import com.inhand.milk.activity.LogRegActivity;
+import com.inhand.milk.entity.User;
 
 /**
  * LoginFragment
@@ -94,19 +95,19 @@ public class LoginFragment extends BackHandleFragment {
             return;
         }
         AVUser.logInInBackground(username, password,
-                new LogInCallback<AVUser>() {
+                new LogInCallback<User>() {
                     @Override
-                    public void done(AVUser avUser, AVException e) {
-                        if (avUser == null) {
+                    public void done(User user, AVException e) {
+                        if (user == null) {
                             usernameEditor.setError(rs.getString(R.string.login_error));
                             usernameEditor.requestFocus();
                         } else {
                             Intent intent = new Intent();
-                            intent.setClass(getActivity(), BaseActivity.class);
+                            intent.setClass(getActivity(), LogRegActivity.entry);
                             startActivity(intent);
                         }
                     }
-                });
+                }, User.class);
     }
 
     @Override

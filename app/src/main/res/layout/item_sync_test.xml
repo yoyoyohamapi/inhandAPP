@@ -2,27 +2,37 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TableRow
-        >
+
+    <TableRow>
+
         <TextView
-            android:id="@+id/duration_text"
+            android:id="@+id/begin_time_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="2dp"/>
+            android:padding="2dp" />
+
         <TextView
-            android:id="@+id/max_temperature_text"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:padding="2dp"/>
-        <TextView
-            android:id="@+id/min_temperature_text"
+            android:id="@+id/end_time_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="2dp"/>
+            android:padding="2dp" />
+
+        <TextView
+            android:id="@+id/begin_temperature_text"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:padding="2dp" />
+
+        <TextView
+            android:id="@+id/end_temperature_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp" />
+
         <TextView
             android:id="@+id/volume_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="2dp"/>
+            android:padding="2dp" />
     </TableRow>
 </TableLayout>

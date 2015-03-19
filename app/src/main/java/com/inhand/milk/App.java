@@ -2,8 +2,11 @@ package com.inhand.milk;
 
 import android.app.Application;
 
+import com.avos.avoscloud.AVUser;
+import com.inhand.milk.entity.Baby;
 import com.inhand.milk.entity.FooterItem;
 import com.inhand.milk.entity.SlidingItem;
+import com.inhand.milk.entity.User;
 import com.inhand.milk.helper.JSONHelper;
 import com.inhand.milk.helper.LeanCloudHelper;
 
@@ -48,5 +51,20 @@ public class App extends Application {
 
     public List<SlidingItem> getSlidingItems() {
         return slidingItems;
+    }
+
+    public static User getCurrentUser() {
+        return AVUser.cast(AVUser.getCurrentUser(), User.class);
+    }
+
+    //获得当前宝宝
+    public static Baby getCurrentBaby() {
+        return null;
+    }
+
+    public boolean logged() {
+        if (AVUser.getCurrentUser() == null)
+            return false;
+        return true;
     }
 }

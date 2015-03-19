@@ -14,6 +14,9 @@ import com.inhand.milk.fragment.LoginFragment;
  * Time: 16:52
  */
 public class LogRegActivity extends BaseActivity {
+    //注册及登录出口
+    public static final Class entry = SyncTestActivity.class;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

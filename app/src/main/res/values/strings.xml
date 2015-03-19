@@ -5,6 +5,9 @@
     <string name="register">注册</string>
     <string name="settings">设置</string>
     <string name="skin">皮肤</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
     <!--各个Fragment标题-->
     <string name="fragment_title_volume">奶量统计</string>
     <string name="fragment_title_temperature">温度统计</string>
