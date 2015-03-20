@@ -6,12 +6,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.SaveCallback;
+import com.inhand.milk.App;
 import com.inhand.milk.R;
 import com.inhand.milk.entity.Baby;
+import com.inhand.milk.utils.ACache;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,7 +36,8 @@ public class BabyInfoTestActivity extends BaseActivity {
     private EditText weightTxt;
     private EditText headSizeTxt;
     private Button submit;
-
+    private Button show;
+    private TextView showTxt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,8 @@ public class BabyInfoTestActivity extends BaseActivity {
         weightTxt = (EditText) findViewById(R.id.weight);
         headSizeTxt = (EditText) findViewById(R.id.head_size);
         submit = (Button) findViewById(R.id.submit);
+        show = (Button) findViewById(R.id.show);
+        showTxt = (TextView) findViewById(R.id.show_txt);
         setListeners();
     }
 
@@ -69,13 +75,18 @@ public class BabyInfoTestActivity extends BaseActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                //先缓存至本地
+                ACache aCache = ACache.get(BabyInfoTestActivity.this);
+                aCache.put(
+                        App.BABY_CACHE_KEY,
+                        baby.toJSONObject()
+                );
                 baby.save(new SaveCallback() {
                     @Override
                     public void done(AVException e) {
                         if (e == null) {
                             Toast.makeText(BabyInfoTestActivity.this, "同步成功", Toast.LENGTH_SHORT)
                                     .show();
-
                         }
                     }
                 });
@@ -96,6 +107,14 @@ public class BabyInfoTestActivity extends BaseActivity {
                         calendar.get(Calendar.YEAR),
                         calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Baby currentBaby = App.getCurrentBaby(BabyInfoTestActivity.this);
+                showTxt.setText(currentBaby.getNickname());
             }
         });
     }

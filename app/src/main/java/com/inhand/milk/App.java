@@ -1,7 +1,9 @@
 package com.inhand.milk;
 
 import android.app.Application;
+import android.content.Context;
 
+import com.alibaba.fastjson.JSON;
 import com.avos.avoscloud.AVUser;
 import com.inhand.milk.entity.Baby;
 import com.inhand.milk.entity.FooterItem;
@@ -9,6 +11,9 @@ import com.inhand.milk.entity.SlidingItem;
 import com.inhand.milk.entity.User;
 import com.inhand.milk.helper.JSONHelper;
 import com.inhand.milk.helper.LeanCloudHelper;
+import com.inhand.milk.utils.ACache;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -23,6 +28,7 @@ import java.util.List;
 public class App extends Application {
     public static final String FOOTER_CONFIG = "config/footer_items.json";
     public static final String SLIDING_CONFIG = "config/sliding_items.json";
+    public static final String BABY_CACHE_KEY = "current_baby";
     private List<FooterItem> footerItems = null;
     private List<SlidingItem> slidingItems = null;
 
@@ -58,8 +64,10 @@ public class App extends Application {
     }
 
     //获得当前宝宝
-    public static Baby getCurrentBaby() {
-        return null;
+    public static Baby getCurrentBaby(Context ctx) {
+        ACache aCache = ACache.get(ctx);
+        JSONObject json = aCache.getAsJSONObject(BABY_CACHE_KEY);
+        return JSON.parseObject(json.toString(), Baby.class);
     }
 
     public boolean logged() {

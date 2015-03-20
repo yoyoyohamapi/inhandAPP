@@ -203,6 +203,7 @@ public class ACache {
     public JSONObject getAsJSONObject(String key) {
         String JSONString = getAsString(key);
         try {
+//            JSONObject obj =JSONObject.parseObject(JSONString);
             JSONObject obj = new JSONObject(JSONString);
             return obj;
         } catch (Exception e) {

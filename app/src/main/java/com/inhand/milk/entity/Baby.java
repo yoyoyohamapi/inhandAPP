@@ -27,6 +27,7 @@ public class Baby extends AVObject {
     public static final String HEAD_SIZE_KEY = "head_size";
     public static final String USER_KEY = "user";
 
+
     public String getNickname() {
         return this.getString(NICKNAME_KEY);
     }
@@ -82,7 +83,7 @@ public class Baby extends AVObject {
         if (baby.getObjectId().length() == 0) {
             baby.setUser(App.getCurrentUser());
         }
-//        baby.saveInBackground(saveCallback);
+        baby.saveInBackground(saveCallback);
 //        helper.insert();
 
     }
