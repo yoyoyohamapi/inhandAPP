@@ -1,14 +1,20 @@
 package com.inhand.milk.entity;
 
+import android.content.Context;
+
 import com.alibaba.fastjson.JSON;
 import com.avos.avoscloud.AVClassName;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.SaveCallback;
+import com.inhand.milk.App;
 import com.inhand.milk.dao.OneDayDao;
 
-import java.text.ParseException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -22,17 +28,18 @@ import java.util.List;
  * Time: 09:17
  */
 @AVClassName(OneDay.ONEDAY_CLASS)
-public class OneDay extends AVObject {
+public class OneDay extends Base {
+    //远程及云端表名都为此
     public static final String ONEDAY_CLASS = "Milk_OneDay";
     public static final String VOLUME_KEY = "volume";
     public static final String RECORDS_KEY = "records";
     public static final String DATE_KEY = "date";
     public static final String SCORE_KEY = "score";
-    public static final String DATE_FORMAT = "yyyy-MM-dd";
+    public static final String VERSION_KEY = "version";
     public static final String BABY_KEY = "baby";
 
-    //日喝奶记录
-    private List<Record> records;
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
+    public static final String VERSION_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     public OneDay() {
 
@@ -47,30 +54,37 @@ public class OneDay extends AVObject {
     }
 
     public List<Record> getRecords() {
-        String recordsJSON = this.getString(RECORDS_KEY);
-        records = JSON.parseArray(recordsJSON, Record.class);
-        return records;
+        JSONArray array = this.getJSONArray(RECORDS_KEY);
+        return JSON.parseArray(array.toString(), Record.class);
     }
 
     public void setRecords(List<Record> records) {
-        this.put(RECORDS_KEY,
-                JSON.toJSONString(records, true));
+        JSONArray array = new JSONArray();
+        for (Record record : records) {
+            JSONObject obj = new JSONObject();
+            try {
+                obj.put(Record.VOLUME_KEY, record.getVolume());
+                obj.put(Record.BEGIN_TEMPERATURE_KEY, record.getBeginTemperature());
+                obj.put(Record.END_TEMPERATURE_KEY, record.getEndTemperature());
+                obj.put(Record.BEGIN_TIME_KEY, record.getBeginTime());
+                obj.put(Record.END_TIME_KEY, record.getEndTime());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            array.put(obj);
+        }
+        this.put(RECORDS_KEY, array);
     }
 
-    public Date getDate() {
-        return this.getDate(DATE_KEY);
+    public String getDate() {
+        return this.getString(DATE_KEY);
     }
 
     public void setDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
         String dateStr = sdf.format(date);
-        Date dstDate = null;
-        try {
-            dstDate = sdf.parse(dateStr);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        this.put(DATE_KEY, dstDate);
+        this.put(DATE_KEY, dateStr);
     }
 
     public int getScore() {
@@ -82,22 +96,38 @@ public class OneDay extends AVObject {
     }
 
     public void setBaby(Baby baby) {
-        this.put(BABY_KEY, baby);
+        try {
+            this.put(BABY_KEY, AVObject.createWithoutData(Baby.class, baby.getObjectId()));
+        } catch (AVException e) {
+            e.printStackTrace();
+        }
     }
 
+    public String getVersion() {
+        return this.getString(VERSION_KEY);
+    }
+
+    public void setVersion(String version) {
+        this.put(VERSION_KEY, version);
+    }
 
     /**
+     * 将数据存储至云端
      * 存储OneDay对象，若该“日”已存在，则为更新
      */
-    public void save(final SaveCallback saveCallback) {
+    public void save(Context ctx, final SaveCallback saveCallback) {
         final OneDay day = this;
-        OneDayDao oneDayDao = new OneDayDao();
-        oneDayDao.findOnedayByDay(day.getDate(), new FindCallback<OneDay>() {
+        //更新版本表示
+        SimpleDateFormat sdf = new SimpleDateFormat(VERSION_FORMAT);
+        final String version = sdf.format(new Date());
+        day.setVersion(version);
+        OneDayDao oneDayDao = new OneDayDao(ctx);
+        oneDayDao.findOneDayFromCloud(day.getDate(), new FindCallback<OneDay>() {
             @Override
             public void done(List<OneDay> oneDays, AVException e) {
                 //如果不存在，插入
                 if (e != null) {
-                    //day(App.getCurrentUser());
+                    day.setBaby(App.getCurrentBaby());
                     day.saveInBackground(saveCallback);
                 } else {
                     //否则更新
@@ -105,10 +135,39 @@ public class OneDay extends AVObject {
                     oneDay.setRecords(day.getRecords());
                     oneDay.setVolume(day.getVolume());
                     oneDay.setScore(day.getScore());
+                    oneDay.setVersion(version);
                     oneDay.saveInBackground(saveCallback);
                 }
             }
         });
     }
 
+    /**
+     * 将数据存至数据库
+     *
+     * @param ctx      上下文环境
+     * @param callback 回调接口
+     */
+    public void saveInDB(final Context ctx,
+                         final DBSavingCallback callback) {
+        this.setBaby(App.getCurrentBaby());
+        SimpleDateFormat sdf = new SimpleDateFormat(VERSION_FORMAT);
+        final String version = sdf.format(new Date());
+        this.setVersion(version);
+        DBSavingTask task = new DBSavingTask(ctx, callback) {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                //先查询数据库中是否有此记录
+                OneDayDao oneDayDao = new OneDayDao(ctx);
+                oneDayDao.updateOrSaveInDB(OneDay.this);
+                return null;
+            }
+        };
+        task.execute();
+    }
+
+    @Override
+    public String getTable() {
+        return ONEDAY_CLASS;
+    }
 }

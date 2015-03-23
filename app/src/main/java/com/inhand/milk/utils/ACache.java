@@ -33,7 +33,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * ACache
- * Desc:
+ * Desc:缓存操作类
  * Team: InHand
  * User:Wooxxx
  * Date: 2015-03-19

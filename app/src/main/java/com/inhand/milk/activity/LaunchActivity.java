@@ -29,7 +29,7 @@ public class LaunchActivity extends Activity {
         public void run() {
             //如果用户已经登录
             if (((App) getApplication()).logged())
-                startActivity(new Intent(getApplication(), BabyInfoTestActivity.class));
+                startActivity(new Intent(getApplication(), SyncTestActivity.class));
             else
                 startActivity(new Intent(getApplication(), LogRegActivity.class));
         }

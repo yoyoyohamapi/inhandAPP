@@ -1,5 +1,7 @@
 package com.inhand.milk.dao;
 
+import android.content.Context;
+
 /**
  * PowderInfoDao
  * Desc:奶粉数据访问对象
@@ -9,4 +11,7 @@ package com.inhand.milk.dao;
  * Time: 08:39
  */
 public class PowderInfoDao extends BaseDao {
+    public PowderInfoDao(Context ctx) {
+        super(ctx);
+    }
 }

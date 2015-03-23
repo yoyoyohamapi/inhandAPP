@@ -1,10 +1,11 @@
 package com.inhand.milk.entity;
 
 
+import android.content.Context;
+
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.inhand.milk.dao.BabyDao;
-import com.inhand.milk.dao.OneDayDao;
 
 
 /**
@@ -28,14 +29,10 @@ public class User extends AVUser {
     }
 
     //获得当前用户的baby
-    public void getBabies(FindCallback<Baby> findCallback) {
-        BabyDao babyDao = new BabyDao();
+    public void getBabies(Context ctx, FindCallback<Baby> findCallback) {
+        BabyDao babyDao = new BabyDao(ctx);
         babyDao.findBabiesByUser(this, findCallback);
     }
 
-    //获得当前用户的喝奶记录
-    public void getOnedays(int limit, FindCallback<OneDay> findCallback) {
-        OneDayDao oneDayDao = new OneDayDao();
-        oneDayDao.findAllOrLimit(limit, findCallback);
-    }
+
 }

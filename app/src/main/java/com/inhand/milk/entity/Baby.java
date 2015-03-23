@@ -1,10 +1,14 @@
 package com.inhand.milk.entity;
 
+import android.content.Context;
+
 import com.avos.avoscloud.AVClassName;
+import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.inhand.milk.App;
+import com.inhand.milk.utils.ACache;
 
 import java.util.Date;
 
@@ -18,8 +22,8 @@ import java.util.Date;
  * Time: 08:37
  */
 @AVClassName(Baby.BABY_CLASS)
-public class Baby extends AVObject {
-    public static final String BABY_CLASS = "_Baby";
+public class Baby extends Base {
+    public static final String BABY_CLASS = "Baby";
     public static final String NICKNAME_KEY = "nickname";
     public static final String BIRTHDAY_KEY = "birthday";
     public static final String HEIGHT_KEY = "height";
@@ -68,8 +72,18 @@ public class Baby extends AVObject {
         this.put(HEAD_SIZE_KEY, headSize);
     }
 
-    public void setUser(AVUser user) {
-        this.put(USER_KEY, user);
+    public void setUser(User user) {
+        try {
+            this.put(USER_KEY, AVObject.createWithoutData(User.class, user.getObjectId()));
+        } catch (AVException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //获得当前宝宝的喝奶记录
+    public void getOnedays(Context ctx, int limit, FindCallback<OneDay> findCallback) {
+//        OneDayDao oneDayDao = new OneDayDao(ctx);
+//        oneDayDao.findAllOrLimit(limit, findCallback);
     }
 
     /**
@@ -77,15 +91,29 @@ public class Baby extends AVObject {
      */
     public void save(final SaveCallback saveCallback) {
         final Baby baby = this;
-        //同时存入缓存
-//        DBHelper helper = DBHelper.getInstance();
-        //若不存在，则插入
         if (baby.getObjectId().length() == 0) {
             baby.setUser(App.getCurrentUser());
         }
         baby.saveInBackground(saveCallback);
-//        helper.insert();
+    }
 
+    /**
+     * 写入缓存,考虑baby对象在离线情况下始终可用，
+     *
+     * @param ctx 上下文环境
+     */
+    public void saveInCache(final Context ctx, final CacheSavingCallback callback) {
+        final Baby baby = this;
+        CacheSavingTask cacheSavingTask =
+                new CacheSavingTask(ctx, callback) {
+                    @Override
+                    protected Object doInBackground(Object[] params) {
+                        ACache aCache = ACache.get(ctx);
+                        aCache.put(App.BABY_CACHE_KEY, baby.toJSONObject());
+                        return super.doInBackground(params);
+                    }
+                };
+        cacheSavingTask.execute();
     }
 
 

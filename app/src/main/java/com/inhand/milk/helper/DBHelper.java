@@ -5,7 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.inhand.milk.entity.OneDay;
+
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * DataBaseHelper
@@ -16,18 +19,23 @@ import java.util.ArrayList;
  * Time: 15:55
  */
 public class DBHelper extends SQLiteOpenHelper {
+    //原子计数器,用以安全地关闭数据库链接
+    private AtomicInteger openCounter = new AtomicInteger();
     //数据库名
-    private static final String DB_NAME = "inhand_milk.db";
+    private static final String DB_NAME = "milk.db";
     //版本维护
     private static final int version = 1;
-    //每张表只包含UUID及JSON列
-    private static final String COLUMN_JSON = "json";
-    private static final String COLUMN_UUID = "uuid";
+    //每张表只包含VERSION及JSON列
+    public static final String COLUMN_JSON = "json";
+    public static final String COLUMN_VERSION = "version";
+    //比较位置，方便比较
+    public static final String COLUMN_COMP = "comp";
     //数据表列表
     private static final String[] TB_NAMES = new String[]{
-            "album"
+            OneDay.ONEDAY_CLASS
     };
-
+    //数据库对象
+    private SQLiteDatabase db;
     private static DBHelper instance = null;
 
     //双重检查加锁实例化单例
@@ -43,6 +51,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     private DBHelper(Context context) {
+        //根据当前宝宝动态指定对应数据库
         super(context, DB_NAME, null, version);
     }
 
@@ -51,9 +60,11 @@ public class DBHelper extends SQLiteOpenHelper {
         /*
         创建数据表
          */
-        for (int i = 0; i < TB_NAMES.length; i++) {
-            db.execSQL("CREATE TABLE IF NOT EXISTS " + TB_NAMES[i]
-                    + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_JSON + " TEXT," + COLUMN_UUID + " VARCHAR)");
+        for (String table : TB_NAMES) {
+            String sql = "CREATE TABLE IF NOT EXISTS " + table
+                    + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_JSON + " TEXT," + COLUMN_VERSION + " TEXT," + COLUMN_COMP + " TEXT)";
+            db.execSQL(sql);
         }
     }
 
@@ -62,19 +73,32 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public synchronized SQLiteDatabase openDatabase() {
+        if (openCounter.incrementAndGet() == 1) {
+            // Opening new database
+            db = instance.getReadableDatabase();
+        }
+        return db;
+    }
+
+    public synchronized void closeDatabase() {
+        if (openCounter.decrementAndGet() == 0) {
+            // Closing database
+            db.close();
+        }
+    }
+
     /**
      * 插入方法
      *
      * @param table 表名
      * @param obj   待插入对象
-     * @param uuid  uuid
      */
-    public void insert(String table, String obj, String uuid) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        db.execSQL("INSERT INTO " + table + " VALUES (NULL, ?, ?)", new Object[]{
-                obj, uuid
-        });
-        db.close();
+    public void insertToJson(String table, String obj, String version, String comp) {
+        SQLiteDatabase db = this.openDatabase();
+        db.execSQL("INSERT INTO " + table + " VALUES (NULL, ?, ?, ?)",
+                new Object[]{obj, version, comp});
+        this.closeDatabase();
     }
 
 

@@ -1,5 +1,7 @@
 package com.inhand.milk.dao;
 
+import android.content.Context;
+
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
@@ -16,8 +18,8 @@ import com.inhand.milk.entity.Baby;
 public class BabyDao extends BaseDao {
     AVQuery<Baby> query = AVQuery.getQuery(Baby.class);
 
-    public BabyDao() {
-        query.setPolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
+    public BabyDao(Context ctx) {
+        super(ctx);
     }
 
     public void findBabiesByUser(AVUser user, FindCallback<Baby> callback) {

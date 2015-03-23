@@ -14,7 +14,7 @@ import com.avos.avoscloud.SaveCallback;
 import com.inhand.milk.App;
 import com.inhand.milk.R;
 import com.inhand.milk.entity.Baby;
-import com.inhand.milk.utils.ACache;
+import com.inhand.milk.entity.Base;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,6 +38,7 @@ public class BabyInfoTestActivity extends BaseActivity {
     private Button submit;
     private Button show;
     private TextView showTxt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,21 +76,25 @@ public class BabyInfoTestActivity extends BaseActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                //先缓存至本地
-                ACache aCache = ACache.get(BabyInfoTestActivity.this);
-                aCache.put(
-                        App.BABY_CACHE_KEY,
-                        baby.toJSONObject()
-                );
+                //写入云端后缓存至本地
                 baby.save(new SaveCallback() {
                     @Override
                     public void done(AVException e) {
                         if (e == null) {
                             Toast.makeText(BabyInfoTestActivity.this, "同步成功", Toast.LENGTH_SHORT)
                                     .show();
+                            baby.saveInCache(BabyInfoTestActivity.this, new Base.CacheSavingCallback() {
+                                @Override
+                                public void done() {
+                                    Toast.makeText(BabyInfoTestActivity.this, "缓存成功", Toast.LENGTH_SHORT)
+                                            .show();
+                                }
+                            });
                         }
                     }
                 });
+
+
             }
         });
 
@@ -113,7 +118,7 @@ public class BabyInfoTestActivity extends BaseActivity {
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Baby currentBaby = App.getCurrentBaby(BabyInfoTestActivity.this);
+                Baby currentBaby = App.getCurrentBaby();
                 showTxt.setText(currentBaby.getNickname());
             }
         });

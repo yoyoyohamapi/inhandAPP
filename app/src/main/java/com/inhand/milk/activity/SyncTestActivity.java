@@ -3,6 +3,7 @@ package com.inhand.milk.activity;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +13,18 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.FindCallback;
 import com.inhand.milk.App;
 import com.inhand.milk.R;
+import com.inhand.milk.entity.Base;
 import com.inhand.milk.entity.OneDay;
 import com.inhand.milk.entity.Record;
+import com.inhand.milk.helper.SyncHelper;
 import com.inhand.milk.utils.ViewHolder;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -67,11 +69,11 @@ public class SyncTestActivity extends BaseActivity {
         today.setDate(new Date());
 
         setListeners();
-        initList();
+        //initList();
     }
 
     private void initList() {
-        App.getCurrentUser().getOnedays(0, new FindCallback<OneDay>() {
+        App.getCurrentBaby().getOnedays(SyncTestActivity.this, 0, new FindCallback<OneDay>() {
             @Override
             public void done(List<OneDay> list, AVException e) {
                 if (e == null) {
@@ -94,18 +96,9 @@ public class SyncTestActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 //单击存储，存储一条饮奶记录
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                Date beginTime = null, endTime = null;
-                try {
-                    beginTime = sdf.parse(
-                            beginTimeEditor.getText().toString()
-                    );
-                    endTime = sdf.parse(
-                            endTimeEditor.getText().toString()
-                    );
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                String beginTime = null, endTime = null;
+                beginTime = beginTimeEditor.getText().toString();
+                endTime = endTimeEditor.getText().toString();
                 double beginTemperature = Double.valueOf(beginTemperEditor.getText()
                         .toString());
                 double endTemperature = Double.valueOf(endTemperEditor.getText()
@@ -121,13 +114,22 @@ public class SyncTestActivity extends BaseActivity {
                     record.setEndTime(endTime);
                     record.setBeginTemperature(beginTemperature + i * 2.0);
                     record.setEndTemperature(endTemperature + i * 2.0);
-                    record.setVolume(volume + i * 3);
+                    record.setVolume(volume);
                     sumVolume += record.getVolume();
                     records.add(record);
                 }
                 today.setVolume(sumVolume);
                 today.setRecords(records);
                 today.setScore(score);
+                Log.d("Score is :", String.valueOf(score));
+                //将today存入数据库
+                today.saveInDB(SyncTestActivity.this, new Base.DBSavingCallback() {
+                    @Override
+                    public void done() {
+                        Toast.makeText(SyncTestActivity.this, "OK", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
             }
         });
 
@@ -135,11 +137,31 @@ public class SyncTestActivity extends BaseActivity {
         syncBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                today.save(null);
+                SyncHelper.syncCloud(SyncTestActivity.this, new SyncHelper.SyncCallback() {
+                    @Override
+                    public void done(AVException e) {
+                        if (e != null)
+                            e.printStackTrace();
+                        else
+                            Toast.makeText(SyncTestActivity.this, "同步成功", Toast.LENGTH_LONG)
+                                    .show();
+                    }
+                });
+//                today.save(SyncTestActivity.this,new SaveCallback() {
+//                    @Override
+//                    public void done(AVException e) {
+//                        if( e==null) {
+//                            Toast.makeText(SyncTestActivity.this,"OK",Toast.LENGTH_LONG)
+//                                    .show();
+//                        }else{
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                });
             }
         });
 
-        //时间选择
+        //开始喝奶时间选择
         beginTimeEditor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,7 +180,7 @@ public class SyncTestActivity extends BaseActivity {
                 ).show();
             }
         });
-        //时间选择
+        //结束喝奶时间选择
         endTimeEditor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -205,11 +227,10 @@ public class SyncTestActivity extends BaseActivity {
             TextView minTmpTxt = ViewHolder.get(convertView, R.id.end_temperature_text);
             TextView maxTmpTxt = ViewHolder.get(convertView, R.id.begin_temperature_text);
             TextView volumeTxt = ViewHolder.get(convertView, R.id.volume_text);
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-            Date beginTime = record.getBeginTime();
-            Date endTime = record.getEndTime();
-            beginTimeTxt.setText(sdf.format(beginTime));
-            endTimeTxt.setText(sdf.format(endTime));
+            String beginTime = record.getBeginTime();
+            String endTime = record.getEndTime();
+            beginTimeTxt.setText(beginTime);
+            endTimeTxt.setText(endTime);
             minTmpTxt.setText(String.valueOf(record.getEndTemperature()));
             maxTmpTxt.setText(String.valueOf(record.getBeginTemperature()));
             volumeTxt.setText(String.valueOf(record.getVolume()));

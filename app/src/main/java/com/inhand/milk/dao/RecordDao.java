@@ -1,5 +1,7 @@
 package com.inhand.milk.dao;
 
+import android.content.Context;
+
 /**
  * RecordDao
  * Desc:
@@ -10,4 +12,7 @@ package com.inhand.milk.dao;
  */
 public class RecordDao extends BaseDao {
 
+    public RecordDao(Context ctx) {
+        super(ctx);
+    }
 }
