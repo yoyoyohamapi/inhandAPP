@@ -118,8 +118,12 @@ public class OneDay extends Base {
     public void save(Context ctx, final SaveCallback saveCallback) {
         final OneDay day = this;
         //更新版本表示
-        SimpleDateFormat sdf = new SimpleDateFormat(VERSION_FORMAT);
-        final String version = sdf.format(new Date());
+        String version = day.getVersion();
+        if (version == null) {
+            //如果先前没有手动设置过version
+            SimpleDateFormat sdf = new SimpleDateFormat(VERSION_FORMAT);
+            version = sdf.format(new Date());
+        }
         day.setVersion(version);
         OneDayDao oneDayDao = new OneDayDao(ctx);
         oneDayDao.findOneDayFromCloud(day.getDate(), new FindCallback<OneDay>() {
@@ -135,7 +139,7 @@ public class OneDay extends Base {
                     oneDay.setRecords(day.getRecords());
                     oneDay.setVolume(day.getVolume());
                     oneDay.setScore(day.getScore());
-                    oneDay.setVersion(version);
+                    oneDay.setVersion(day.getVersion());
                     oneDay.saveInBackground(saveCallback);
                 }
             }
@@ -151,8 +155,13 @@ public class OneDay extends Base {
     public void saveInDB(final Context ctx,
                          final DBSavingCallback callback) {
         this.setBaby(App.getCurrentBaby());
-        SimpleDateFormat sdf = new SimpleDateFormat(VERSION_FORMAT);
-        final String version = sdf.format(new Date());
+        //更新版本表示
+        String version = this.getVersion();
+        if (version == null) {
+            //如果先前没有手动设置过version
+            SimpleDateFormat sdf = new SimpleDateFormat(VERSION_FORMAT);
+            version = sdf.format(new Date());
+        }
         this.setVersion(version);
         DBSavingTask task = new DBSavingTask(ctx, callback) {
             @Override
