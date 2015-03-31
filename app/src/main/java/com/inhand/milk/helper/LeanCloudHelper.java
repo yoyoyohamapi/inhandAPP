@@ -33,7 +33,6 @@ public class LeanCloudHelper {
         AVObject.registerSubclass(OneDay.class);
         //AVObject.registerSubclass(Record.class);
         AVObject.registerSubclass(Baby.class);
-        AVObject.registerSubclass(KeyPoint.class);
     }
 
     /**

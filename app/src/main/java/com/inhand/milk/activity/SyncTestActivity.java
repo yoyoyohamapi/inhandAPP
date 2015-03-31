@@ -20,6 +20,7 @@ import com.avos.avoscloud.FindCallback;
 import com.inhand.milk.App;
 import com.inhand.milk.R;
 import com.inhand.milk.entity.Base;
+import com.inhand.milk.entity.KeyPoint;
 import com.inhand.milk.entity.OneDay;
 import com.inhand.milk.entity.Record;
 import com.inhand.milk.helper.SyncHelper;
@@ -115,6 +116,16 @@ public class SyncTestActivity extends BaseActivity {
                     record.setBeginTemperature(beginTemperature + i * 2.0);
                     record.setEndTemperature(endTemperature + i * 2.0);
                     record.setVolume(volume);
+                    List<KeyPoint>keyPoints=new ArrayList<KeyPoint>();
+                    for(int j=0;j<5;j++){
+                        KeyPoint keyPoint=new KeyPoint();
+                        keyPoint.setScale(500+j);
+                        keyPoint.setTemperature(60+j);
+                        keyPoint.setTime(10+j);
+                        keyPoints.add(keyPoint);
+                    }
+                    record.setKeyPointsJSON(keyPoints);
+                    Log.d("KeyPointsJSON",record.getKeyPointsJSON().toString());
                     sumVolume += record.getVolume();
                     records.add(record);
                 }
