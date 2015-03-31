@@ -1,6 +1,14 @@
 package com.inhand.milk.entity;
 
 
+import com.alibaba.fastjson.JSON;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
 /**
  * Record
  * Desc: 某次的记录
@@ -21,7 +29,8 @@ public class Record {
     //喝奶时间
     public static final String BEGIN_TIME_KEY = "beginTime";
     public static final String END_TIME_KEY = "endTime";
-
+    //关键点
+    public static final String KEYPOINTS_KEY="key_points";
     //奶量
     private int volume;
     //温度(最低温度，最高温度)
@@ -30,7 +39,8 @@ public class Record {
     //喝奶时间
     private String beginTime;
     private String endTime;
-
+    //关键点序列化
+    private String keyPointsJSON;
     public Record() {
 
     }
@@ -73,6 +83,28 @@ public class Record {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public List<KeyPoint> getKeyPoints() {
+        return JSON.parseArray(this.getKeyPointsJSON(), KeyPoint.class);
+    }
+    public String getKeyPointsJSON(){
+        return keyPointsJSON;
+    }
+    public void setKeyPointsJSON(List<KeyPoint> keyPoints) {
+        JSONArray array = new JSONArray();
+        for (KeyPoint keyPoint : keyPoints) {
+            JSONObject obj = new JSONObject();
+            try {
+                obj.put(keyPoint.SCALE_KEY,keyPoint.getScale());
+                obj.put(keyPoint.TEMPERATURE_KEY,keyPoint.getTemperature());
+                obj.put(keyPoint.TIME_KEY,keyPoint.getTime());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            array.put(obj);
+        }
+        this.keyPointsJSON=array.toString();
     }
 
     /**
