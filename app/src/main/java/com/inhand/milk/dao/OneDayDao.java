@@ -325,16 +325,46 @@ public class OneDayDao extends BaseDao {
         assert dstDate != null;
         version = dstDate.after(srcDate) ?
                 dst.getVersion() : src.getVersion();
-        List<Record> records;
+        List<Record> records = new ArrayList<>();
         List<Record> dstRecords = dst.getRecords();
         List<Record> srcRecords = src.getRecords();
         //如果新版本已经包含就版本，则覆盖合并
+        int count = dstRecords.size() > srcRecords.size() ?
+             srcRecords.size() : dstRecords.size();
+        int i;
         if (dstRecords.get(0).equals(srcRecords.get(0))) {
-            records = dstRecords.size() > srcRecords.size() ?
-                    dstRecords : srcRecords;
-        } else {
-            //否则链接合并
-            //dst端的版本较新
+             for (i = 0; i < count; i++) {
+                  Record dstRecord = dstRecords.get(i);
+                  Record srcRecord = srcRecords.get(i);
+                  if (!dstRecord.equals(srcRecord)) {
+                      records.add(i, dstRecord);
+                  } else {
+                      SimpleDateFormat compSdf = new SimpleDateFormat("HH:mm:ss");
+                      try {
+                           Date srcBeginTime = compSdf.parse(srcRecord.getBeginTime());
+                           Date dstBeginTime = compSdf.parse(dstRecord.getBeginTime());
+                           //将日期较晚的喝奶记录追加在后面
+                           if (srcBeginTime.after(dstBeginTime)) {
+                           records.add(i + 1, srcRecord);
+                           records.add(i, dstRecord);
+                           } else {
+                               records.add(i + 1, dstRecord);
+                               records.add(i, srcRecord);
+                           }
+                      } catch (ParseException e) {
+                           e.printStackTrace();
+                      }
+                    }
+                  }
+                  //剩余追加
+                  if (dstRecords.size() > count) {
+                      records.addAll(dstRecords.subList(i, dstRecords.size()));
+                  } else if (srcRecords.size() > count) {
+                      records.addAll(srcRecords.subList(i, srcRecords.size()));
+                  }
+                } else {
+                //否则链接合并
+                //dst端的版本较新
             if (dstDate.after(srcDate)) {
                 records = srcRecords;
                 records.addAll(dstRecords);
