@@ -1,6 +1,7 @@
 package com.inhand.milk.helper;
 
 import android.content.Context;
+import android.os.Build;
 
 import com.alibaba.fastjson.JSON;
 
@@ -40,4 +41,13 @@ public class JSONHelper {
         }
         return null;
     }
+    public static String getValidJSON(String JSON){
+        if (Build.VERSION.SDK_INT<17){
+            JSON=JSON.replace("\"[","[");
+            JSON=JSON.replace("\\","");
+            JSON=JSON.replace("]\"","]");
+        }
+        return JSON;
+    }
+
 }
