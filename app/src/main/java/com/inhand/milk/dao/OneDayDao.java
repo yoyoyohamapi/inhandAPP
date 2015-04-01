@@ -352,6 +352,7 @@ public class OneDayDao extends BaseDao {
                                records.add(i + 1, dstRecord);
                                records.add(i, srcRecord);
                            }
+
                       } catch (ParseException e) {
                            e.printStackTrace();
                       }
@@ -374,6 +375,10 @@ public class OneDayDao extends BaseDao {
                 records = dstRecords;
                 records.addAll(srcRecords);
             }
+        }
+
+        if (records.size() == 0) {
+            return;
         }
 
 
