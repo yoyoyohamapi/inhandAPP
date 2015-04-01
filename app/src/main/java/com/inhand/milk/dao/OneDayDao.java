@@ -15,6 +15,7 @@ import com.inhand.milk.entity.Base;
 import com.inhand.milk.entity.OneDay;
 import com.inhand.milk.entity.Record;
 import com.inhand.milk.helper.DBHelper;
+import com.inhand.milk.helper.JSONHelper;
 import com.inhand.milk.utils.Calculator;
 
 import java.text.ParseException;
@@ -225,20 +226,23 @@ public class OneDayDao extends BaseDao {
                 + App.getCurrentBaby().getObjectId();
         String whereClause = DBHelper.COLUMN_COMP + "=?";
         String[] whereArgs = {compStr};
+        String oneDayJSON= JSONHelper.getValidJSON(oneDay.toJSONObject().toString());
+        Log.d("oneDayJSON",oneDayJSON);
         OneDay old = findOneDayFromDB(date);
         // 如果已存在且版本不一致,则更新
         if (old != null) {
+            String oldJSON=JSONHelper.getValidJSON(old.toJSONObject().toString());
             merge(oneDay, old);
             //保存跟新当前版本标识
             ContentValues cv = new ContentValues();
-            cv.put(DBHelper.COLUMN_JSON, old.toJSONObject().toString());
+            cv.put(DBHelper.COLUMN_JSON, oldJSON);
             cv.put(DBHelper.COLUMN_VERSION, old.getVersion());
             db.update(OneDay.ONEDAY_CLASS, cv, whereClause, whereArgs);
         } else {
             //否则直接插入
             dbHelper.insertToJson(
                     OneDay.ONEDAY_CLASS,
-                    oneDay.toJSONObject().toString(),
+                    oneDayJSON,
                     oneDay.getVersion(),
                     compStr
             );
