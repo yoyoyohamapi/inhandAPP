@@ -109,7 +109,7 @@ public class SyncTestActivity extends BaseActivity {
                 int score = Integer.valueOf(scoreEditor.getText().toString());
                 int sumVolume = 0;
                 List<Record> records = new ArrayList<Record>();
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 1; i++) {
                     Record record = new Record();
                     record.setBeginTime(beginTime);
                     record.setEndTime(endTime);
@@ -126,6 +126,7 @@ public class SyncTestActivity extends BaseActivity {
                     }
                     record.setKeyPointsJSON(keyPoints);
                     Log.d("KeyPointsJSON",record.getKeyPointsJSON().toString());
+
                     sumVolume += record.getVolume();
                     records.add(record);
                 }

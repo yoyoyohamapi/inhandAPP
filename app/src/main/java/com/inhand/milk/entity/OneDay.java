@@ -68,11 +68,10 @@ public class OneDay extends Base {
                 obj.put(Record.END_TEMPERATURE_KEY, record.getEndTemperature());
                 obj.put(Record.BEGIN_TIME_KEY, record.getBeginTime());
                 obj.put(Record.END_TIME_KEY, record.getEndTime());
-                obj.put(Record.KEYPOINTS_KEY,record.getKeyPointsJSON());
+                obj.put(Record.KEY_POINTS_KEY, record.getKeyPointsJSON());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
             array.put(obj);
         }
         this.put(RECORDS_KEY, array);

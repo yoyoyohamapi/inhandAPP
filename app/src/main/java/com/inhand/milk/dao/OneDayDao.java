@@ -44,6 +44,7 @@ public class OneDayDao extends BaseDao {
     @Override
     public void findAllFromCloud(int limit, FindCallback callback) {
         // 按照更新时间降序排序
+        query.whereEqualTo("baby", App.getCurrentBaby().getObjectId());
         query.orderByDescending(SORT_BY);
         // 最大返回1000条
         if (limit > 0)
@@ -54,11 +55,13 @@ public class OneDayDao extends BaseDao {
     @Override
     public List<OneDay> findAllFromCloud(int limit) {
         List<OneDay> oneDays = new ArrayList<>();
+        query.whereEqualTo("baby", App.getCurrentBaby().getObjectId());
         query.orderByDescending(SORT_BY);
         if (limit > 0)
             query.limit(0);
         try {
             oneDays = query.find();
+            Log.d("find size:", String.valueOf(oneDays.size()));
         } catch (AVException e) {
             e.printStackTrace();
         }
@@ -204,8 +207,7 @@ public class OneDayDao extends BaseDao {
             String json = cursor.getString(cursor.getColumnIndex(
                     DBHelper.COLUMN_JSON
             ));
-            OneDay old = JSON.parseObject(json, OneDay.class);
-            return old;
+            return JSON.parseObject(json, OneDay.class);
         }
         cursor.close();
         return null;
@@ -218,7 +220,6 @@ public class OneDayDao extends BaseDao {
      */
     public void updateOrSaveInDB(Base src) {
         OneDay oneDay = (OneDay) src;
-
         String date = oneDay.getDate();
         final String compStr = date + ":"
                 + App.getCurrentBaby().getObjectId();
@@ -230,19 +231,18 @@ public class OneDayDao extends BaseDao {
             merge(oneDay, old);
             //保存跟新当前版本标识
             ContentValues cv = new ContentValues();
-            cv.put(DBHelper.COLUMN_JSON, JSON.toJSONString(old));
+            cv.put(DBHelper.COLUMN_JSON, old.toJSONObject().toString());
             cv.put(DBHelper.COLUMN_VERSION, old.getVersion());
             db.update(OneDay.ONEDAY_CLASS, cv, whereClause, whereArgs);
         } else {
             //否则直接插入
             dbHelper.insertToJson(
                     OneDay.ONEDAY_CLASS,
-                    JSON.toJSONString(oneDay),
+                    oneDay.toJSONObject().toString(),
                     oneDay.getVersion(),
                     compStr
             );
         }
-        //dbHelper.closeDatabase();
     }
 
 
@@ -328,7 +328,8 @@ public class OneDayDao extends BaseDao {
         List<Record> records = new ArrayList<>();
         List<Record> dstRecords = dst.getRecords();
         List<Record> srcRecords = src.getRecords();
-        //如果新版本已经包含就版本，则覆盖合并
+        Log.d("src size is:", String.valueOf(src.getRecords().size()));
+        //如果新版本已经包含旧的版本，则覆盖合并
         int count = dstRecords.size() > srcRecords.size() ?
              srcRecords.size() : dstRecords.size();
         int i;

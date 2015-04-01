@@ -1,6 +1,8 @@
 package com.inhand.milk.entity;
 
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 
 import org.json.JSONArray;
@@ -17,20 +19,17 @@ import java.util.List;
  * Date: 2015-03-04
  * Time: 20:22
  */
-//@AVClassName(Record.RECORED_CLASS)
 public class Record {
-    public static final String RECORED_CLASS = "Milk_Record";
-
     //奶量
     public static final String VOLUME_KEY = "volume";
     //温度(最低温度，最高温度)
-    public static final String BEGIN_TEMPERATURE_KEY = "begin_temperature";
-    public static final String END_TEMPERATURE_KEY = "end_temperature";
+    public static final String BEGIN_TEMPERATURE_KEY = "beginTemperature";
+    public static final String END_TEMPERATURE_KEY = "endTemperature";
     //喝奶时间
     public static final String BEGIN_TIME_KEY = "beginTime";
     public static final String END_TIME_KEY = "endTime";
     //关键点
-    public static final String KEYPOINTS_KEY="key_points";
+    public static final String KEY_POINTS_KEY = "keyPointsJSON";
     //奶量
     private int volume;
     //温度(最低温度，最高温度)
@@ -40,7 +39,7 @@ public class Record {
     private String beginTime;
     private String endTime;
     //关键点序列化
-    private String keyPointsJSON;
+    private JSONArray keyPointsJSON;
     public Record() {
 
     }
@@ -85,10 +84,11 @@ public class Record {
         this.endTime = endTime;
     }
 
-    public List<KeyPoint> getKeyPoints() {
-        return JSON.parseArray(this.getKeyPointsJSON(), KeyPoint.class);
+    public List<KeyPoint> fetchKeyPoints() {
+        return JSON.parseArray(this.getKeyPointsJSON().toString(), KeyPoint.class);
     }
-    public String getKeyPointsJSON(){
+
+    public JSONArray getKeyPointsJSON() {
         return keyPointsJSON;
     }
     public void setKeyPointsJSON(List<KeyPoint> keyPoints) {
@@ -96,16 +96,17 @@ public class Record {
         for (KeyPoint keyPoint : keyPoints) {
             JSONObject obj = new JSONObject();
             try {
-                obj.put(keyPoint.SCALE_KEY,keyPoint.getScale());
-                obj.put(keyPoint.TEMPERATURE_KEY,keyPoint.getTemperature());
-                obj.put(keyPoint.TIME_KEY,keyPoint.getTime());
+                obj.put(KeyPoint.SCALE_KEY, keyPoint.getScale());
+                obj.put(KeyPoint.TEMPERATURE_KEY, keyPoint.getTemperature());
+                obj.put(KeyPoint.TIME_KEY, keyPoint.getTime());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             array.put(obj);
         }
-        this.keyPointsJSON=array.toString();
+        this.keyPointsJSON = array;
     }
+
 
     /**
      * 根据饮奶的开始时间判断两次饮奶记录是否为
@@ -115,51 +116,12 @@ public class Record {
      * @return
      */
     public boolean equals(Record record) {
+        Log.d("dst begin time is", this.getBeginTime());
+
+        Log.d("src begin time is", record.getBeginTime());
         if (record.getBeginTime()
                 .equals(this.getBeginTime()))
             return true;
         return false;
     }
-
-    //
-//
-//    public int getVolume() {
-//        return this.getInt(VOLUME_KEY);
-//    }
-//
-//    public void setVolume(int volume) {
-//        this.put(VOLUME_KEY,volume);
-//    }
-//
-//    public double getEndTemperature() {
-//        return this.getDouble(END_TEMPERATURE_KEY);
-//    }
-//
-//    public void setEndTemperature(double endTemperature) {
-//        this.put(END_TEMPERATURE_KEY,endTemperature);
-//    }
-//
-//    public double getBeginTemperature() {
-//        return this.getDouble(BEGIN_TEMPERATURE_KEY);
-//    }
-//
-//    public void setBeginTemperature(double beginTemperature) {
-//        this.put(BEGIN_TEMPERATURE_KEY,beginTemperature);
-//    }
-//
-//    public Date getBeginTime() {
-//        return this.getDate(BEGIN_TIME_KEY);
-//    }
-//
-//    public void setBeginTime(Date beginTime) {
-//        this.put(BEGIN_TIME_KEY,beginTime);
-//    }
-//
-//    public Date getEndTime() {
-//        return this.getDate(END_TIME_KEY);
-//    }
-//
-//    public void setEndTime(Date endTime) {
-//        this.put(END_TIME_KEY,endTime);
-//    }
 }
