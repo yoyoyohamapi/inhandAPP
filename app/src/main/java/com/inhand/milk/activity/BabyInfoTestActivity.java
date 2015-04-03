@@ -16,10 +16,7 @@ import com.inhand.milk.R;
 import com.inhand.milk.entity.Baby;
 import com.inhand.milk.entity.Base;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * BabyInfoTestActivity
@@ -68,14 +65,7 @@ public class BabyInfoTestActivity extends BaseActivity {
                 baby.setHeight(height);
                 baby.setWeight(weight);
                 baby.setHeadSize(headSize);
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
-                Date date;
-                try {
-                    date = sdf.parse(birthday);
-                    baby.setBirthday(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                baby.setBirthday(birthday);
                 //写入云端后缓存至本地
                 baby.save(new SaveCallback() {
                     @Override
