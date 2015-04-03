@@ -10,8 +10,6 @@ import com.avos.avoscloud.SaveCallback;
 import com.inhand.milk.App;
 import com.inhand.milk.utils.ACache;
 
-import java.util.Date;
-
 
 /**
  * Baby
@@ -40,11 +38,11 @@ public class Baby extends Base {
         this.put(NICKNAME_KEY, nickname);
     }
 
-    public Date getBirthday() {
-        return this.getDate(BIRTHDAY_KEY);
+    public String getBirthday() {
+        return this.getString(BIRTHDAY_KEY);
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.put(BIRTHDAY_KEY, birthday);
     }
 
