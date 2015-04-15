@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
 import com.inhand.milk.App;
 import com.inhand.milk.R;
@@ -35,6 +36,7 @@ public class BabyInfoTestActivity extends BaseActivity {
     private Button submit;
     private Button show;
     private TextView showTxt;
+    private Button logOutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class BabyInfoTestActivity extends BaseActivity {
         submit = (Button) findViewById(R.id.submit);
         show = (Button) findViewById(R.id.show);
         showTxt = (TextView) findViewById(R.id.show_txt);
+        logOutBtn = (Button) findViewById(R.id.log_out_btn);
         setListeners();
     }
 
@@ -110,6 +113,13 @@ public class BabyInfoTestActivity extends BaseActivity {
             public void onClick(View v) {
                 Baby currentBaby = App.getCurrentBaby();
                 showTxt.setText(currentBaby.getNickname());
+            }
+        });
+
+        logOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AVUser.logOut();
             }
         });
     }

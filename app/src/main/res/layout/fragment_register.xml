@@ -1,111 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/login_container"
+    android:padding="0dp">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:id="@+id/top"
-        style="@style/top">
-
-        <TextView
-            android:id="@+id/top_title"
-            style="@style/top_title"
-            android:text="@string/reg_step_phone" />
-
-    </LinearLayout>
-
-    <ViewFlipper
-        android:id="@+id/view_flipper"
+    <!-- 注册表单部分 -->
+    <LinearLayout
+        android:id="@+id/register_form_container"
+        style="@style/log_reg_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp">
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/phone_page"
+        <ImageView
+            android:id="@+id/register_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="20dp"
+            android:src="@drawable/register_title" />
+
+        <EditText
+            android:id="@+id/username"
+            style="@style/log_reg_form"
+            android:layout_marginBottom="15dp"
+            android:drawableLeft="@drawable/register_icon_phone"
+            android:drawableStart="@drawable/register_icon_phone"
+            android:inputType="phone"
+            android:hint="@string/login_name_hint"
+            android:gravity="left" />
+
+        <EditText
+            android:id="@+id/password"
+            style="@style/log_reg_form"
+            android:layout_marginBottom="15dp"
+            android:drawableStart="@drawable/login_details_icon_password"
+            android:drawableLeft="@drawable/login_details_icon_password"
+            android:inputType="textPassword"
+            android:hint="@string/reg_pwd_hint"
+            android:gravity="left" />
+
+        <EditText
+            android:id="@+id/re_password"
+            style="@style/log_reg_form"
+            android:layout_marginBottom="15dp"
+            android:drawableStart="@drawable/login_details_icon_password"
+            android:drawableLeft="@drawable/login_details_icon_password"
+            android:inputType="textPassword"
+            android:hint="@string/reg_repwd_hint"
+            android:gravity="left" />
+
+        <FrameLayout
+            android:id="@+id/register_auth_code_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
+            android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/phone"
-                style="@style/form_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:hint="@string/reg_phone_hint" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
-
-                <Button
-                    android:id="@+id/get_vc_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:text="@string/reg_phone_vbtn"
-                    android:layout_gravity="center_vertical" />
-
-                <EditText
-                    android:id="@+id/vc"
-                    style="@style/form_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:hint="@string/reg_phone_vhint"
-                    android:layout_gravity="center_vertical" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/pwd_page"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/first_pwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:id="@+id/auth_code"
+                style="@style/log_reg_form"
+                android:drawableStart="@drawable/register_icon_auth_code"
+                android:drawableLeft="@drawable/register_icon_auth_code"
                 android:inputType="textPassword"
-                android:hint="@string/pwd_hint"
-                style="@style/login_form" />
+                android:hint="@string/reg_ac_hint"
+                android:gravity="left" />
 
-            <EditText
-                android:id="@+id/second_pwd"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/get_auth_code_btn"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="@string/reenter_pwd_hint"
-                style="@style/login_form" />
-        </LinearLayout>
+                android:layout_gravity="right"
+                android:background="@drawable/common_bandage"
+                android:padding="15dp"
+                android:textSize="18sp"
+                android:textColor="@color/common_bandage_font"
+                android:text="@string/reg_ac_btn" />
+        </FrameLayout>
+    </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/base_info_page"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/register_options_container"
+        style="@style/log_reg_options_footer">
 
-            <EditText
-                android:id="@+id/family_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/family_name_hint" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/to_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/register_btn_to_login"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp" />
 
-    </ViewFlipper>
+        <ImageView
+            android:id="@+id/submit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/register_btn_submit" />
 
-    <Button
-        android:id="@+id/next"
-        style="@style/default_button"
-        android:background="@drawable/default_btn"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:text="@string/reg_next" />
-</LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="copyright_height">30dp</dimen>
+    <dimen name="launch_logo_marginTop">80dp</dimen>
+    <dimen name="launch_logo_size">180dp</dimen>
+
+
     <dimen name="header_height">75dp</dimen>
     <dimen name="header_title_marginTop">8dp</dimen>
     <dimen name="header_title_textSize">18sp</dimen>
@@ -24,4 +29,7 @@
     <dimen name="sliding_footer_iconSize">30dp</dimen>
     <dimen name="sliding_footer_padding">5dp</dimen>
 
+    <!-- 登陆部分-->
+    <dimen name="login_options_logo_marginTop">30dp</dimen>
+    <dimen name="login_padding">50dp</dimen>
 </resources>

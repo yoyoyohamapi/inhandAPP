@@ -26,7 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LogRegActivity" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.FamilyActivity" />
         <activity android:name=".activity.SettingsActivity" />

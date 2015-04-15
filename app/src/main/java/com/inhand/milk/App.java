@@ -77,7 +77,7 @@ public class App extends Application {
         return currentBaby;
     }
 
-    public boolean logged() {
+    public static boolean logged() {
         if (AVUser.getCurrentUser() == null)
             return false;
         return true;

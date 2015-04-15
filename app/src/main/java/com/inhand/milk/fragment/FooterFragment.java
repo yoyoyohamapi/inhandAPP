@@ -31,7 +31,6 @@ import java.util.List;
 public class FooterFragment extends BaseFragment {
     private LinearLayout footer;
     private FragmentManager fm;
-    private List<FooterItem> footerItems;
 
     //监听底部栏切换
     class SwitchListener implements View.OnClickListener {
@@ -74,7 +73,7 @@ public class FooterFragment extends BaseFragment {
      */
     private void initMenus() {
         Context ctx = getActivity();
-        footerItems = ((App) getActivity().getApplication()).getFooterItems();
+        List<FooterItem> footerItems = ((App) getActivity().getApplication()).getFooterItems();
         for (int i = 0; i < footerItems.size(); i++) {
             FooterItem item = footerItems.get(i);
             int id = getResources()

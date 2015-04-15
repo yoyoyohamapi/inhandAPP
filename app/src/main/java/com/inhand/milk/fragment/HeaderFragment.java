@@ -1,6 +1,5 @@
 package com.inhand.milk.fragment;
 
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -51,7 +50,6 @@ public class HeaderFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         initSlidingMenu();
         //获得地理位置
-
     }
 
     /**
@@ -76,7 +74,6 @@ public class HeaderFragment extends BaseFragment {
      * 初始化侧滑菜单列表
      */
     private void initMenuList() {
-        Context ctx = getActivity();
         slidingItems = ((App) getActivity().getApplication()).getSlidingItems();
         adapter = new SlidingAdapter();
         menuList.setAdapter(adapter);

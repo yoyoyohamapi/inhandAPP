@@ -17,6 +17,7 @@ import com.inhand.milk.dao.BabyDao;
  * Time: 14:35
  */
 public class User extends AVUser {
+    public static final String CLASS_NAME = "_USER";
     //昵称列
     public static final String NICKNAME_KEY = "nickname";
 
