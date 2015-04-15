@@ -59,7 +59,8 @@ public class RegisterFragment extends BackHandleFragment {
     Animation bottomOutAnim;
     Animation fadeInAnim, fadeOutAnim;
 
-    private final int FADE_DURATION = 400;
+    private final int FADE_DURATION = 500;
+    private final int ANIM_DURATION = 400;
 
     // 定义验证错误代码
     private final int NO_ERROR = 0; //无错误
@@ -91,13 +92,13 @@ public class RegisterFragment extends BackHandleFragment {
         initAnimations();
         toLogin.startAnimation(leftInAnim);
         submitBtn.startAnimation(rightInAnim);
+        formContainer.startAnimation(fadeInAnim);
         return rootView;
     }
 
     @Override
     public void initViews() {
         formContainer = (LinearLayout) rootView.findViewById(R.id.register_form_container);
-        formContainer.setAlpha(0);
         optionsContainer = (LinearLayout) rootView.findViewById(R.id.register_options_container);
         usernameEditor = (EditText) rootView.findViewById(R.id.username);
         passwordEditor = (EditText) rootView.findViewById(R.id.password);
@@ -245,12 +246,15 @@ public class RegisterFragment extends BackHandleFragment {
         leftInAnim = AnimationUtils.loadAnimation(
                 getActivity(), R.anim.left_in
         );
+        leftInAnim.setDuration(ANIM_DURATION);
         rightInAnim = AnimationUtils.loadAnimation(
                 getActivity(), R.anim.right_in
         );
+        rightInAnim.setDuration(ANIM_DURATION);
         bottomOutAnim = AnimationUtils.loadAnimation(
                 getActivity(), R.anim.bottom_out
         );
+        bottomOutAnim.setDuration(ANIM_DURATION);
         bottomOutAnim.setFillAfter(true);
         fadeInAnim = AnimationUtils.loadAnimation(
                 getActivity(), R.anim.fade_in
@@ -265,24 +269,6 @@ public class RegisterFragment extends BackHandleFragment {
         fadeOutAnim.setDuration(FADE_DURATION);
         fadeOutAnim.setFillAfter(true);
 
-        leftInAnim.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                formContainer.setAlpha(1);
-                formContainer.startAnimation(fadeInAnim);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-
         bottomOutAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -291,7 +277,6 @@ public class RegisterFragment extends BackHandleFragment {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                formContainer.startAnimation(fadeOutAnim);
             }
 
             @Override

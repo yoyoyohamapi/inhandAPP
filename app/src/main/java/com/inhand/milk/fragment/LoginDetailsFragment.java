@@ -51,6 +51,9 @@ public class LoginDetailsFragment extends BaseFragment {
 
     Animation weiXinAnim, weiBoAnim, footerAnim, fadeInAnim;
 
+    private final int FADE_DURATION = 500;
+    private final int ANIM_DURATION = 300;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -146,15 +149,19 @@ public class LoginDetailsFragment extends BaseFragment {
         weiXinAnim = AnimationUtils.loadAnimation(
                 getActivity(), R.anim.left_in
         );
+        weiXinAnim.setDuration(ANIM_DURATION);
         weiBoAnim = AnimationUtils.loadAnimation(
                 getActivity(), R.anim.right_in
         );
+        weiBoAnim.setDuration(ANIM_DURATION);
         footerAnim = AnimationUtils.loadAnimation(
                 getActivity(), R.anim.bottom_in
         );
+        footerAnim.setDuration(ANIM_DURATION);
         fadeInAnim = AnimationUtils.loadAnimation(
                 getActivity(), R.anim.fade_in
         );
+        fadeInAnim.setDuration(FADE_DURATION);
         fadeInAnim.setFillAfter(true);
     }
 
