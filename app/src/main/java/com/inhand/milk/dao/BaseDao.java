@@ -107,6 +107,11 @@ public class BaseDao {
         }
     }
 
+    /**
+     * 数据库查找回调接口
+     *
+     * @param <T>
+     */
     public interface DBFindCallback<T> {
         public void done(List<T> results);
     }

@@ -8,6 +8,7 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.inhand.milk.App;
+import com.inhand.milk.dao.OneDayDao;
 import com.inhand.milk.utils.ACache;
 
 
@@ -78,14 +79,21 @@ public class Baby extends Base {
         }
     }
 
-    //获得当前宝宝的喝奶记录
+    /**
+     * 获得当前宝宝的喝奶记录
+     *
+     * @param ctx          上下文环境
+     * @param limit        需求数目
+     * @param findCallback 回调接口
+     */
     public void getOnedays(Context ctx, int limit, FindCallback<OneDay> findCallback) {
-//        OneDayDao oneDayDao = new OneDayDao(ctx);
-//        oneDayDao.findAllOrLimit(limit, findCallback);
+        OneDayDao oneDayDao = new OneDayDao(ctx);
+        //oneDayDao.findAllOrLimit(limit, findCallback);
     }
 
     /**
      * 存储Baby对象，若已存在，则为更新
+     * @param saveCallback    回调接口
      */
     public void save(final SaveCallback saveCallback) {
         final Baby baby = this;
@@ -99,6 +107,7 @@ public class Baby extends Base {
      * 写入缓存,考虑baby对象在离线情况下始终可用，
      *
      * @param ctx 上下文环境
+     * @param callback    回调接口
      */
     public void saveInCache(final Context ctx, final CacheSavingCallback callback) {
         final Baby baby = this;

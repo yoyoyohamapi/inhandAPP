@@ -29,7 +29,13 @@ public class User extends AVUser {
         this.put(NICKNAME_KEY, nickname);
     }
 
-    //获得当前用户的baby
+
+    /**
+     * 取得当前用户的所有宝宝
+     *
+     * @param ctx          上下文环境
+     * @param findCallback 回调接口
+     */
     public void getBabies(Context ctx, FindCallback<Baby> findCallback) {
         BabyDao babyDao = new BabyDao(ctx);
         babyDao.findBabiesByUser(this, findCallback);

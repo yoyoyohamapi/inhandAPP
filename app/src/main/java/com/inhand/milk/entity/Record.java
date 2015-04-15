@@ -112,8 +112,8 @@ public class Record {
      * 根据饮奶的开始时间判断两次饮奶记录是否为
      * 同一条
      *
-     * @param record
-     * @return
+     * @param record 比较对象
+     * @return 是否相等
      */
     public boolean equals(Record record) {
         Log.d("dst begin time is", this.getBeginTime());

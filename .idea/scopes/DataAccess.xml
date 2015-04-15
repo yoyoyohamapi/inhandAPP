@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="DataAccess" pattern="src[App]:com.inhand.milk.dao.*||src[App]:com.inhand.milk.entity.*||src[App]:com.inhand.milk.helper.*" />
+</component>

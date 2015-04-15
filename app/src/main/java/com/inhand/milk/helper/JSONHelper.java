@@ -41,6 +41,14 @@ public class JSONHelper {
         }
         return null;
     }
+
+    /**
+     * 校正JSON字串，解决低版本Android
+     * 的json序列化问题
+     *
+     * @param JSON 待修正JSON字串
+     * @return
+     */
     public static String getValidJSON(String JSON){
         if (Build.VERSION.SDK_INT<17){
             JSON=JSON.replace("\"[","[");

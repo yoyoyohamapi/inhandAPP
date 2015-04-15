@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * UserDao
- * Desc:
+ * Desc:用户访问对象
  * Team: Rangers
  * Date: 2015/4/15
  * Time: 10:00

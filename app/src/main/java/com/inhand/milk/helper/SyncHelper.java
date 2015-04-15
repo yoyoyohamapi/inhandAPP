@@ -52,7 +52,9 @@ public class SyncHelper {
 
     }
 
-    //同步回调接口
+    /**
+     * 同步回调接口
+     */
     public interface SyncCallback {
         public void done(AVException e);
     }

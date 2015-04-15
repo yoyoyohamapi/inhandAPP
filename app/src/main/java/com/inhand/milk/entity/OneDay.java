@@ -114,6 +114,8 @@ public class OneDay extends Base {
     /**
      * 将数据存储至云端
      * 存储OneDay对象，若该“日”已存在，则为更新
+     * @param ctx   上下文环境
+     * @param saveCallback 回调接口
      */
     public void save(Context ctx, final SaveCallback saveCallback) {
         final OneDay day = this;
