@@ -1,8 +1,6 @@
 package com.inhand.milk.entity;
 
 
-import android.util.Log;
-
 import com.alibaba.fastjson.JSON;
 
 import org.json.JSONArray;
@@ -116,9 +114,6 @@ public class Record {
      * @return 是否相等
      */
     public boolean equals(Record record) {
-        Log.d("dst begin time is", this.getBeginTime());
-
-        Log.d("src begin time is", record.getBeginTime());
         if (record.getBeginTime()
                 .equals(this.getBeginTime()))
             return true;

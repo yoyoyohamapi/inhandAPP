@@ -47,8 +47,6 @@ public class App extends Application {
                 App.FOOTER_CONFIG,
                 FooterItem.class
         );
-
-
         initCurrentBaby();
     }
 
@@ -72,14 +70,23 @@ public class App extends Application {
         }
     }
 
-    //获得当前宝宝
+    /**
+     * 获得当前宝宝
+     *
+     * @return 当前宝宝
+     */
     public static Baby getCurrentBaby() {
         return currentBaby;
     }
 
+    /**
+     * 判断用户是否登陆
+     * @return 登陆与否
+     */
     public static boolean logged() {
         if (AVUser.getCurrentUser() == null)
             return false;
         return true;
     }
+
 }

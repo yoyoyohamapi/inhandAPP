@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
 import com.inhand.milk.App;
 import com.inhand.milk.R;
@@ -119,7 +118,7 @@ public class BabyInfoTestActivity extends BaseActivity {
         logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AVUser.logOut();
+                App.getCurrentUser().logOut(BabyInfoTestActivity.this);
             }
         });
     }

@@ -18,12 +18,12 @@ import java.util.List;
  * Created by: Wooxxx
  */
 public class UserDao extends BaseDao {
-    private static AVQuery<User>
-            query = new AVQuery<>(User.CLASS_NAME);
+    private AVQuery<User> query;
 
 
     public UserDao(Context ctx) {
         super(ctx);
+        query = new AVQuery<>(User.CLASS_NAME);
     }
 
     /**
@@ -32,7 +32,7 @@ public class UserDao extends BaseDao {
      * @param username 待查询用户名
      * @param callback 回调接口
      */
-    public static void findUserByUsername(String username,
+    public void findUserByUsername(String username,
                                           final FindCallback<User> callback) {
         query.whereEqualTo("username", username);
         query.findInBackground(callback);
@@ -44,7 +44,7 @@ public class UserDao extends BaseDao {
      * @param username 待查询用户名
      * @return callback 回调接口
      */
-    public static List<User> findUserByUsername(String username) {
+    public List<User> findUserByUsername(String username) {
         query.whereEqualTo("username", username);
         try {
             return query.find();

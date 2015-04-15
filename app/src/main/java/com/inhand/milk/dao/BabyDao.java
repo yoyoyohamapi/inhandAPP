@@ -2,10 +2,13 @@ package com.inhand.milk.dao;
 
 import android.content.Context;
 
+import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.inhand.milk.entity.Baby;
+
+import java.util.List;
 
 /**
  * BabyDao
@@ -16,14 +19,35 @@ import com.inhand.milk.entity.Baby;
  * Time: 08:44
  */
 public class BabyDao extends BaseDao {
-    AVQuery<Baby> query = AVQuery.getQuery(Baby.class);
+    public static AVQuery<Baby> query = AVQuery.getQuery(Baby.class);
 
     public BabyDao(Context ctx) {
         super(ctx);
     }
 
-    public void findBabiesByUser(AVUser user, FindCallback<Baby> callback) {
+    /**
+     * 异步地查询某用户的所有宝宝
+     *
+     * @param user     用户
+     * @param callback 回调接口
+     */
+    public static void findBabiesByUser(AVUser user, FindCallback<Baby> callback) {
         query.whereEqualTo(Baby.USER_KEY, user);
         query.findInBackground(callback);
+    }
+
+    /**
+     * 同步地查询某用户的所有宝宝
+     *
+     * @param user 用户
+     */
+    public static List<Baby> findBabiesByUser(AVUser user) {
+        query.whereEqualTo(Baby.USER_KEY, user);
+        try {
+            return query.find();
+        } catch (AVException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

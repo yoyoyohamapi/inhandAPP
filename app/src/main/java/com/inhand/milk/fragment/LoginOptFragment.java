@@ -1,11 +1,13 @@
 package com.inhand.milk.fragment;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import android.widget.LinearLayout;
 import com.inhand.milk.App;
 import com.inhand.milk.R;
 import com.inhand.milk.activity.BabyInfoTestActivity;
+import com.inhand.milk.entity.User;
 
 /**
  * LoginOptFragment
@@ -161,13 +164,38 @@ public class LoginOptFragment extends BaseFragment {
      */
     public class NeedLoginHandler implements Runnable {
         public void run() {
-            //如果用户未登录，显示登录选项
-            if (App.logged())
-                getActivity().startActivity(
-                        new Intent(getActivity(), BabyInfoTestActivity.class));
+            //如果用户未登录，显示登录选项,否则
+            // 根据用户是否含有宝宝判断是否需要进入宝宝信息填写
+            if (App.logged()) {
+                new PreJudgingTask().execute();
+            }
             else
                 logo.startAnimation(logoInAnim);
         }
+    }
 
+    /**
+     * 登陆后预判断任务
+     */
+    class PreJudgingTask extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            int errorCode = App.getCurrentUser().hasBaby(getActivity());
+            switch (errorCode) {
+                case User.HAS_BABY:
+                    Log.d("User has baby", "has");
+                    break;
+                case User.NO_BABY:
+                    Log.d("User has baby", "none");
+                    break;
+                case User.NETWORK_ERROR:
+                    Log.d("User has baby", "network error");
+                    break;
+            }
+            getActivity().startActivity(
+                    new Intent(getActivity(), BabyInfoTestActivity.class));
+            return null;
+        }
     }
 }

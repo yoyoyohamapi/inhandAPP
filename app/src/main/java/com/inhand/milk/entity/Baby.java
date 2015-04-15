@@ -14,7 +14,7 @@ import com.inhand.milk.utils.ACache;
 
 /**
  * Baby
- * Desc:
+ * Desc:Baby实体
  * Team: InHand
  * User:Wooxxx
  * Date: 2015-03-17
@@ -29,7 +29,10 @@ public class Baby extends Base {
     public static final String WEIGHT_KEY = "weight";
     public static final String HEAD_SIZE_KEY = "head_size";
     public static final String USER_KEY = "user";
+    public static final String SEX_KEY = "sex";
 
+    public static int FEMALE = 0; // 女性
+    public static int MALE = 1; // 男性
 
     public String getNickname() {
         return this.getString(NICKNAME_KEY);
@@ -69,6 +72,14 @@ public class Baby extends Base {
 
     public void setHeadSize(int headSize) {
         this.put(HEAD_SIZE_KEY, headSize);
+    }
+
+    public int getSex() {
+        return this.getInt(SEX_KEY);
+    }
+
+    public void setSex(int sex) {
+        this.put(SEX_KEY, sex);
     }
 
     public void setUser(User user) {
@@ -117,6 +128,8 @@ public class Baby extends Base {
                     protected Object doInBackground(Object[] params) {
                         ACache aCache = ACache.get(ctx);
                         aCache.put(App.BABY_CACHE_KEY, baby.toJSONObject());
+                        // 同时更新CurrentBaby
+                        App.currentBaby = baby;
                         return super.doInBackground(params);
                     }
                 };
