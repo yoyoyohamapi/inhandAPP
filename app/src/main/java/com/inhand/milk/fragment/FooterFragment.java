@@ -44,7 +44,7 @@ public class FooterFragment extends BaseFragment {
         public void onClick(View v) {
             FragmentTransaction ft =
                     fm.beginTransaction();
-            ft.replace(R.id.main_fragment, dst, Fragment.class.toString());
+            //ft.replace(R.id.main_fragment, dst, Fragment.class.toString());
             ft.commit();
         }
     }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,11 @@ import android.widget.TextView;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.LogInCallback;
+import com.inhand.milk.App;
 import com.inhand.milk.R;
 import com.inhand.milk.activity.LaunchActivity;
+import com.inhand.milk.entity.User;
+import com.inhand.milk.utils.PreJudgingTask;
 
 /**
  * LoginDetailsFragment
@@ -188,19 +192,19 @@ public class LoginDetailsFragment extends BaseFragment {
         }
         //进行登录
         AVUser.logInInBackground(username, password,
-                new LogInCallback<AVUser>() {
+                new LogInCallback<User>() {
                     @Override
-                    public void done(AVUser avUser, AVException e) {
+                    public void done(User avUser, AVException e) {
                         if (avUser == null) {
                             //登录失败进行提示
                             usernameEditor.setError(rs.getString(R.string.login_error));
                             usernameEditor.requestFocus();
                         } else {
-                            Intent intent = new Intent();
-                            intent.setClass(getActivity(), LaunchActivity.LOGGED_TO);
-                            startActivity(intent);
+                            Log.d("usersex1", App.getCurrentUser().getSex()+"");
+                            PreJudgingTask task=new PreJudgingTask(getActivity());
+                            task.execute();
                         }
                     }
-                });
+                },User.class);
     }
 }

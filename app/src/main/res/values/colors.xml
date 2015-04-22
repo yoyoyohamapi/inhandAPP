@@ -25,4 +25,74 @@
     <color name="login_divide">#62ffffff</color>
     <!-- ************************Health部分********************************* -->
     <color name="health_list_divider">#ffc8c8c8</color>
+
+    <!-- ************************分工部分********************************* -->
+
+    <!-- main title -->
+    <color name="main_title_text_color">#ffffffff</color>
+
+    <!-- health colors -->
+    <color name="health_item_name_text_color">#ff000000</color>
+    <color name="health_item_details_text_color">#ff888888</color>
+    <color name="health_item_dividing_line_color">#ffc8c8c8</color>
+    <color name="health_listview_color">#ffffffff</color>
+
+    <!-- health nutrition-->
+    <color name="health_nutrition_time_now_text_color">#ff000000</color>
+
+    <!-- home fragment -->
+    <color name="home_circle_outermost">#e5e9e9</color>
+    <color name="home_circle_inner_outermost">#ffffff</color>
+    <color name="home_circle_inner_outer_second">#f7fdfc</color>
+    <color name="home_circle_inner_outer_third">#e6f8f5</color>
+    <color name="home_low_score_color">#fd7272</color>
+    <color name="home_high_score_color">#058da6</color>
+    <color name="home_fen_color">#666666</color>
+    <color name="home_doc_color">#089f9f</color>
+    <color name="home_advise_text_color">#555555</color>
+    <color name="home_advise_left_num_color">#fd7272</color>
+    <color name="home_advise_right_num_color">#02bdb4</color>
+
+    <!-- menu  -->
+    <color name="menu_item_text_color">#ffffff</color>
+    <color name="menu_head_text_color">#ffffff</color>
+    <color name="menu_head_under_line_color">#ffffff</color>
+
+    <!-- temperature_amount -->
+    <color name="temperature_milk_checked_color">#b2ebf9</color>
+    <color name="temperature_milk_unchecked_color">#02b4ba</color>
+    <color name="temperature_milk_title_text_color">#ffffff</color>
+    <color name="temperature_milk_excle_background_color">#ffffff</color>
+    <color name="temperature_milk_excle_title_text_color">#000000</color>
+    <color name="temperature_milk_excle_grid_first_background_color">#edfaf9</color>
+    <color name="temperature_milk_excle_grid_second_background_color">#ffffff</color>
+    <color name="temperature_milk_excle_line_color">#0196a0</color>
+    <color name="milk_circle_double_line_color">#209297</color>
+    <color name="temperature_circle_line_background_color">#209297</color>
+    <color name="temperature_circle_left_line_color">#eef966</color>
+    <color name="temperature_circle_right_line_color">#00f5fe</color>
+
+    <!-- tempreture_amount details -->
+    <color name="details_content_header_background_color">#fff0eff5</color>
+    <color name="details_content_header_dividing_line_color">#c8c8c8</color>
+    <color name="details_content_header_text_color">#6d6c72</color>
+    <color name="details_content_amount_text_color">#000000</color>
+    <color name="details_content_time_text_color">#929294</color>
+    <color name="details_content_under_line_color">#c8c8c8</color>
+    <color name="details_content_background_color">#ffffff</color>
+    <color name="details_once_title_color">#c8c8c8</color>
+    <color name="details_once_item_background_color">#ffffff</color>
+    <color name="details_once_text_color">#000000</color>
+    <color name="details_once_title_background_color">#fff0eff5</color>
+
+    <!-- utils firet lanunch -->
+    <color name="small_dots_select_color">#ffffff</color>
+    <color name="small_dots_noselect_color">#c8c8c8</color>
+    <color name="ruler_color">#61e5b8</color>
+
+
+    <!-- first launch  -->
+    <color name="first_launch_title_color">#f1f16b</color>
+    <color name="first_launch_text_bakcground_color">#77ffff</color>
+    <color name="first_launch_text_color">#00ff00</color>
 </resources>

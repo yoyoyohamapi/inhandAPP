@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
+import com.avos.avoscloud.SaveCallback;
 import com.inhand.milk.App;
 import com.inhand.milk.dao.BabyDao;
 import com.inhand.milk.utils.ACache;
@@ -25,7 +26,11 @@ public class User extends AVUser {
     public static final String CLASS_NAME = "_USER";
     //昵称列
     public static final String NICKNAME_KEY = "nickname";
+    //性别列
+    public  static  final String SEX_KEY="sex";
 
+    public static int FEMALE = 2; // 女性
+    public static int MALE = 1; // 男性
     // 判断用户是否有baby的错误码
     public static final int NO_BABY = 0;
     public static final int HAS_BABY = 1;
@@ -39,7 +44,11 @@ public class User extends AVUser {
         this.put(NICKNAME_KEY, nickname);
     }
 
+    public int getSex(){return this.getInt(SEX_KEY);  }
 
+    public void setSex(int sex) {
+        this.put(SEX_KEY, sex);
+    }
     /**
      * 取得当前用户的所有宝宝
      * @param findCallback 回调接口
@@ -81,4 +90,6 @@ public class User extends AVUser {
         aCache.remove(App.BABY_CACHE_KEY);
         AVUser.logOut();
     }
+
+
 }

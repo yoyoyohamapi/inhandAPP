@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  * Date: 2015-03-04
  * Time: 20:22
  */
-public class Record {
+public class Record implements Serializable{
     //奶量
     public static final String VOLUME_KEY = "volume";
     //温度(最低温度，最高温度)
@@ -31,8 +32,8 @@ public class Record {
     //奶量
     private int volume;
     //温度(最低温度，最高温度)
-    private double beginTemperature;
-    private double endTemperature;
+    private float beginTemperature;
+    private float endTemperature;
     //喝奶时间
     private String beginTime;
     private String endTime;
@@ -50,19 +51,19 @@ public class Record {
         this.volume = volume;
     }
 
-    public double getEndTemperature() {
+    public float getEndTemperature() {
         return endTemperature;
     }
 
-    public void setEndTemperature(double endTemperature) {
+    public void setEndTemperature(float endTemperature) {
         this.endTemperature = endTemperature;
     }
 
-    public double getBeginTemperature() {
+    public float getBeginTemperature() {
         return beginTemperature;
     }
 
-    public void setBeginTemperature(double beginTemperature) {
+    public void setBeginTemperature(float beginTemperature) {
         this.beginTemperature = beginTemperature;
     }
 
@@ -85,7 +86,9 @@ public class Record {
     public List<KeyPoint> fetchKeyPoints() {
         return JSON.parseArray(this.getKeyPointsJSON().toString(), KeyPoint.class);
     }
-
+    public List<KeyPoint> getKeyPoints(){
+        return JSON.parseArray(this.keyPointsJSON.toString(), KeyPoint.class);
+    }
     public JSONArray getKeyPointsJSON() {
         return keyPointsJSON;
     }

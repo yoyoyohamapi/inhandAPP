@@ -34,7 +34,7 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onResume() {
         String title = getResources().getString(getTitleId());
-        ((MainActivity) getActivity()).getHeader().setTitle(title);
+        //((MainActivity) getActivity()).getHeader().setTitle(title);
         super.onResume();
     }
 }

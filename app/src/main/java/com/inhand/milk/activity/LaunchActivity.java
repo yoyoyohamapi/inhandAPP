@@ -1,5 +1,6 @@
 package com.inhand.milk.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.inhand.milk.R;
@@ -20,10 +21,10 @@ public class LaunchActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
+//        this.startActivity(new Intent(this,SyncTestActivity.class));
+
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_container, new LoginOptFragment()).commit();
+               .replace(R.id.main_container, new LoginOptFragment()).commit();
 
     }
-
-
 }

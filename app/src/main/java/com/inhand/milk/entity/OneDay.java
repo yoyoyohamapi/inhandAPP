@@ -10,6 +10,7 @@ import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.inhand.milk.App;
 import com.inhand.milk.dao.OneDayDao;
+import com.inhand.milk.helper.JSONHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,7 +56,8 @@ public class OneDay extends Base {
 
     public List<Record> getRecords() {
         JSONArray array = this.getJSONArray(RECORDS_KEY);
-        return JSON.parseArray(array.toString(), Record.class);
+        String recordsJson= JSONHelper.getValidCloudJSON(array.toString());
+        return JSON.parseArray(recordsJson, Record.class);
     }
 
     public void setRecords(List<Record> records) {
