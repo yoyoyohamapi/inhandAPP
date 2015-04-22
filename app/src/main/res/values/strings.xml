@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">嘟嘟喝奶</string>
+    <string name="action_settings">Settings</string>
     <!--默认-->
     <string name="login">登录</string>
     <string name="register">注册</string>
@@ -54,4 +55,70 @@
     <string name="sliding_list_family">家庭成员</string>
     <string name="sliding_list_advice">建议反馈</string>
 
+    <!-- ************************分工部分********************************* -->
+
+    <!-- health nutrition -->
+    <string name="health_nutrition_title">饮奶营养成分</string>
+
+    <!-- health  -->
+    <string name="health_title_text">健康信息</string>
+
+    <!-- home fragment -->
+    <string name="home_circle_doc">查看更多历史分数</string>
+    <string name="home_title_text">饮奶综合评分</string>
+    <string name="home_advise_left_title">上次用量： </string>
+    <string name="home_advise_right_title">建议用量： </string>
+    <string name="home_advise_second_title">奶量： </string>
+    <string name="home_advise_third_title">温度： </string>
+
+    <!-- menu  -->
+    <string-array name="menu_item_texts">
+        <item >家庭成员</item>
+        <item >奶瓶设置</item>
+        <item >个人意见</item>
+    </string-array>
+
+    <!-- tempreture_amount   -->
+    <string name="temperature_milk_day_text">日</string>
+    <string name="temperature_milk_week_text">周</string>
+    <string name="temperature_milk_month_text">月</string>
+    <string name="temperature_title_text">饮奶温度统计</string>
+    <string name="temperature_excle_day_right_title">今天</string>
+    <string name="temperature_excle_day_left_title">饮奶温度/°C</string>
+    <string name="temperature_excle_week_right_title">本周</string>
+    <string name="temperature_excle_week_left_title">饮奶温度/°C</string>
+    <string name="temperature_excle_month_right_title">本月</string>
+    <string name="temperature_excle_month_left_title">饮奶温度/°C</string>
+    <string name="milk_title_text">饮奶奶量统计</string>
+    <string name="milk_excle_day_right_title">今天</string>
+    <string name="milk_excle_day_left_title">饮奶奶量/ml</string>
+    <string name="milk_excle_week_right_title">本周</string>
+    <string name="milk_excle_week_left_title">饮奶奶量/ml</string>
+    <string name="milk_excle_month_right_title">本月</string>
+    <string name="milk_excle_month_left_title">饮奶奶量/ml</string>
+    <string name="temerature_circle_bottome_left_title">饮奶开始温度</string>
+    <string name="temerature_circle_bottome_right_title">饮奶结束温度</string>
+
+    <!-- tempreture_amount details -->
+    <string name="details_milk_title_string">饮奶奶量详情</string>
+    <string name="details_temperature_title_string">饮奶温度详情</string>
+    <string name="details_once_title_string">饮奶详情</string>
+    <string name="details_once_real_amount_string">实际饮奶量</string>
+    <string name="details_once_advise_amount_string">建议饮奶量</string>
+    <string name="details_once_temperature_start">开始饮奶温度</string>
+    <string name="details_once_temperature_end">结束饮奶温度</string>
+    <string name="details_once_health">本次健康指数</string>
+    <string name="details_once_end_time">饮奶结束时间</string>
+
+    <!-- first launch -->
+    <string name="first_launch_choose_parents">选择你的性别</string>
+    <string name="first_launch_choose_babysex_date">选择宝宝的生日</string>
+    <string name="first_launch_choose_babysex_name">填写宝宝的昵称</string>
+    <string name="first_launch_choose_baby_info">宝宝基础信息</string>
+    <string name="first_launch_choose_weight_info">宝宝的体重</string>
+    <string name="first_launch_choose_height_info">宝宝的身高</string>
+    <string name="first_launch_choose_head_info">宝宝的头围</string>
+    <string name="first_launch_choose_milk_info">宝宝的奶粉</string>
+    <string name="first_launch_choose_milk_text">请选择宝宝的奶粉</string>
+    <string name="first_launch_choose_milk_doc">选择奶粉的重要性，点这里</string>
 </resources>

@@ -24,6 +24,7 @@ import com.avos.avoscloud.SaveCallback;
 import com.inhand.milk.R;
 import com.inhand.milk.activity.LaunchActivity;
 import com.inhand.milk.entity.User;
+import com.inhand.milk.utils.PreJudgingTask;
 import com.inhand.milk.utils.Validator;
 
 /**
@@ -178,9 +179,8 @@ public class RegisterFragment extends BackHandleFragment {
                                             // 停止验证码计时
                                             timer.cancel();
                                             // 跳转到首页入口
-                                            getActivity().startActivity(new Intent(
-                                                    getActivity(), LaunchActivity.LOGGED_TO
-                                            ));
+                                            PreJudgingTask task=new PreJudgingTask(getActivity());
+                                            task.execute();
                                         } else {
                                             e.printStackTrace();
                                             user = null;

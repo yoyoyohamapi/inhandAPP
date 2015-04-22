@@ -30,8 +30,7 @@ public class Baby extends Base {
     public static final String HEAD_SIZE_KEY = "head_size";
     public static final String USER_KEY = "user";
     public static final String SEX_KEY = "sex";
-
-    public static int FEMALE = 0; // 女性
+    public static int FEMALE = 2; // 女性
     public static int MALE = 1; // 男性
 
     public String getNickname() {
@@ -50,27 +49,27 @@ public class Baby extends Base {
         this.put(BIRTHDAY_KEY, birthday);
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return this.getInt(HEIGHT_KEY);
     }
 
-    public void setHeight(int height) {
+    public void setHeight(float height) {
         this.put(HEIGHT_KEY, height);
     }
 
-    public int getWeight() {
+    public float getWeight() {
         return this.getInt(WEIGHT_KEY);
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(float weight) {
         this.put(WEIGHT_KEY, weight);
     }
 
-    public int getHeadSize() {
+    public float getHeadSize() {
         return this.getInt(HEAD_SIZE_KEY);
     }
 
-    public void setHeadSize(int headSize) {
+    public void setHeadSize(float headSize) {
         this.put(HEAD_SIZE_KEY, headSize);
     }
 

@@ -1,5 +1,7 @@
 package com.inhand.milk.entity;
 
+import java.io.Serializable;
+
 /**
  * KeyPoint
  * Desc:蓝牙记录关键点
@@ -8,7 +10,7 @@ package com.inhand.milk.entity;
  * Date: 2015-03-18
  * Time: 23:05
  */
-public class KeyPoint {
+public class KeyPoint implements Serializable{
     //刻度
     public static final String SCALE_KEY = "scale";
     //时间
@@ -19,7 +21,7 @@ public class KeyPoint {
     //刻度
     private int scale;
     //温度
-    private double temperature;
+    private float temperature;
     //时间
     private int time;
 
@@ -34,11 +36,11 @@ public class KeyPoint {
         this.scale = scale;
     }
 
-    public double getTemperature() {
+    public float getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(double temperature) {
+    public void setTemperature(float temperature) {
         this.temperature = temperature;
     }
 

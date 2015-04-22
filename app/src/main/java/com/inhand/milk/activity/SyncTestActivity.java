@@ -66,8 +66,7 @@ public class SyncTestActivity extends BaseActivity {
         scoreEditor = (EditText) findViewById(R.id.score_edit);
         scoreEditor = (EditText) findViewById(R.id.score_edit);
         listView = (ListView) findViewById(R.id.list);
-        today = new OneDay();
-        today.setDate(new Date());
+
 
         setListeners();
         //initList();
@@ -96,13 +95,20 @@ public class SyncTestActivity extends BaseActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                today = new OneDay();
+                today.setDate(new Date());
+/*                Calendar cal = Calendar.getInstance();
+                cal.setTime(new Date());
+                cal.add(Calendar.DAY_OF_YEAR, -1);
+                Date preDate =cal.getTime();
+                today.setDate(preDate);*/
                 //单击存储，存储一条饮奶记录
                 String beginTime = null, endTime = null;
                 beginTime = beginTimeEditor.getText().toString();
                 endTime = endTimeEditor.getText().toString();
-                double beginTemperature = Double.valueOf(beginTemperEditor.getText()
+                float beginTemperature = Float.valueOf(beginTemperEditor.getText()
                         .toString());
-                double endTemperature = Double.valueOf(endTemperEditor.getText()
+                float endTemperature = Float.valueOf(endTemperEditor.getText()
                         .toString());
                 int volume = Integer.valueOf(volumeEditor.getText()
                         .toString());
@@ -113,14 +119,14 @@ public class SyncTestActivity extends BaseActivity {
                     Record record = new Record();
                     record.setBeginTime(beginTime);
                     record.setEndTime(endTime);
-                    record.setBeginTemperature(beginTemperature + i * 2.0);
-                    record.setEndTemperature(endTemperature + i * 2.0);
+                    record.setBeginTemperature(beginTemperature + i * 2);
+                    record.setEndTemperature(endTemperature + i * 2);
                     record.setVolume(volume);
                     List<KeyPoint>keyPoints=new ArrayList<KeyPoint>();
                     for(int j=0;j<5;j++){
                         KeyPoint keyPoint=new KeyPoint();
                         keyPoint.setScale(500+j);
-                        keyPoint.setTemperature(60+j);
+                        keyPoint.setTemperature(30+j);
                         keyPoint.setTime(10+j);
                         keyPoints.add(keyPoint);
                     }
@@ -132,6 +138,9 @@ public class SyncTestActivity extends BaseActivity {
                 }
                 today.setVolume(sumVolume);
                 today.setRecords(records);
+                Record record=today.getRecords().get(0);
+                Log.d("recordJson",today.getJSONArray(OneDay.RECORDS_KEY).toString());
+                Log.d("record_time",record.getBeginTime());
                 today.setScore(score);
                 Log.d("Score is :", String.valueOf(score));
                 //将today存入数据库
@@ -153,7 +162,7 @@ public class SyncTestActivity extends BaseActivity {
                     @Override
                     public void done(AVException e) {
                         if (e != null)
-                            e.printStackTrace();
+                            e.getMessage();
                         else
                             Toast.makeText(SyncTestActivity.this, "同步成功", Toast.LENGTH_LONG)
                                     .show();

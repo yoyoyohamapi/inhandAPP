@@ -177,4 +177,8 @@
         <item name="android:layout_weight">1</item>
         <item name="android:scaleType">centerInside</item>
     </style>
+
+    <!-- ************************分工部分********************************* -->
+
+    <color name="color_white">#ffffff</color>
 </resources>

@@ -11,6 +11,7 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.FindCallback;
 import com.inhand.milk.App;
+import com.inhand.milk.activity.SyncTestActivity;
 import com.inhand.milk.entity.Base;
 import com.inhand.milk.entity.OneDay;
 import com.inhand.milk.entity.Record;
@@ -35,17 +36,18 @@ import java.util.List;
 public class OneDayDao extends BaseDao {
     private static final String SORT_BY = "createdAt";
     private AVQuery<OneDay> query;
+    private static final String RECORDS_COMP_FORMAT = "HH:mm";
 
     public OneDayDao(Context ctx) {
         super(ctx);
-        query = new AVQuery<>(OneDay.ONEDAY_CLASS);
     }
 
 
     @Override
     public void findAllFromCloud(int limit, FindCallback callback) {
+        query = AVQuery.getQuery(OneDay.class);
         // 按照更新时间降序排序
-        query.whereEqualTo("baby", App.getCurrentBaby().getObjectId());
+        query.whereEqualTo(OneDay.BABY_KEY, App.getCurrentBaby());
         query.orderByDescending(SORT_BY);
         // 最大返回1000条
         if (limit > 0)
@@ -55,14 +57,14 @@ public class OneDayDao extends BaseDao {
 
     @Override
     public List<OneDay> findAllFromCloud(int limit) {
+        query = AVQuery.getQuery(OneDay.class);
         List<OneDay> oneDays = new ArrayList<>();
-        query.whereEqualTo("baby", App.getCurrentBaby().getObjectId());
+        query.whereEqualTo(OneDay.BABY_KEY, App.getCurrentBaby());
         query.orderByDescending(SORT_BY);
         if (limit > 0)
             query.limit(0);
         try {
             oneDays = query.find();
-            Log.d("find size:", String.valueOf(oneDays.size()));
         } catch (AVException e) {
             e.printStackTrace();
         }
@@ -76,6 +78,8 @@ public class OneDayDao extends BaseDao {
      * @param callback 回调函数
      */
     public void findOneDayFromCloud(String date, FindCallback callback) {
+        query = AVQuery.getQuery(OneDay.class);
+        query.whereEqualTo(OneDay.BABY_KEY, App.getCurrentBaby());
         query.whereEqualTo(OneDay.DATE_KEY, date);
         query.findInBackground(callback);
     }
@@ -87,6 +91,8 @@ public class OneDayDao extends BaseDao {
      * @return 查询到的对象
      */
     public OneDay findOneDayFromCloud(String date) {
+        query = AVQuery.getQuery(OneDay.class);
+        query.whereEqualTo(OneDay.BABY_KEY, App.getCurrentBaby());
         query.whereEqualTo(OneDay.DATE_KEY, date);
         try {
             List<OneDay> days = query.find();
@@ -124,13 +130,14 @@ public class OneDayDao extends BaseDao {
     public List<OneDay> findAllFromDB(int limit) {
         List<OneDay> oneDays = new ArrayList<>();
         String count = limit > 0 ? "0," + String.valueOf(limit) : null;
+        final String whereClause = DBHelper.COLUMN_COMP + " like ?";
+        final String[] whereArgs = new String[]{"%" + App.getCurrentBaby().getObjectId() + "%"};
         String orderBy = "_id";
-        //取出计数器
         Cursor cursor = this.db.query(
                 OneDay.ONEDAY_CLASS,
                 new String[]{DBHelper.COLUMN_JSON},
-                null,
-                null,
+                whereClause,
+                whereArgs,
                 null,
                 null,
                 orderBy,
@@ -143,6 +150,7 @@ public class OneDayDao extends BaseDao {
             OneDay oneDay = JSON.parseObject(json, OneDay.class);
             oneDays.add(oneDay);
         }
+        cursor.close();
         return oneDays;
     }
 
@@ -154,17 +162,18 @@ public class OneDayDao extends BaseDao {
      * @param callback
      */
     public void findOneDayFromDB(String date, final DBFindCallback callback) {
-        SimpleDateFormat sdf = new SimpleDateFormat(OneDay.DATE_FORMAT);
-        final String dateStr = sdf.format(date);
-        final List<OneDay> days = null;
+        final String compStr = date + ":" + App.getCurrentBaby().getObjectId();
+        final String whereClause = DBHelper.COLUMN_COMP + "=?";
+        final String[] whereArgs = new String[]{compStr};
+        final List<OneDay> days = new ArrayList<>();
         DBFindTask task = new DBFindTask() {
             @Override
             protected Object doInBackground(Object[] params) {
                 Cursor cursor = OneDayDao.this.db.query(
                         OneDay.ONEDAY_CLASS,
                         null,
-                        DBHelper.COLUMN_COMP,
-                        new String[]{dateStr},
+                        whereClause,
+                        whereArgs,
                         null, null, null);
                 if (cursor.moveToNext()) {
                     cursor.move(0);
@@ -174,6 +183,7 @@ public class OneDayDao extends BaseDao {
                     OneDay oneDay = JSON.parseObject(json, OneDay.class);
                     days.add(oneDay);
                 }
+                cursor.close();
                 return super.doInBackground(params);
             }
 
@@ -226,13 +236,12 @@ public class OneDayDao extends BaseDao {
                 + App.getCurrentBaby().getObjectId();
         String whereClause = DBHelper.COLUMN_COMP + "=?";
         String[] whereArgs = {compStr};
-        String oneDayJSON= JSONHelper.getValidJSON(oneDay.toJSONObject().toString());
-        Log.d("oneDayJSON",oneDayJSON);
+        String oneDayJSON = JSONHelper.getValidJSON(oneDay.toJSONObject().toString());
         OneDay old = findOneDayFromDB(date);
         // 如果已存在且版本不一致,则更新
         if (old != null) {
-            String oldJSON=JSONHelper.getValidJSON(old.toJSONObject().toString());
             merge(oneDay, old);
+            String oldJSON = JSONHelper.getValidJSON(old.toJSONObject().toString());
             //保存跟新当前版本标识
             ContentValues cv = new ContentValues();
             cv.put(DBHelper.COLUMN_JSON, oldJSON);
@@ -250,11 +259,6 @@ public class OneDayDao extends BaseDao {
     }
 
 
-    public void findOneDayFromCloud(Date date, FindCallback callback) {
-
-    }
-
-
     /**
      * 与云端同步数据：
      * 1. 先从云端抓取到所有数据
@@ -268,11 +272,13 @@ public class OneDayDao extends BaseDao {
      * 3. 打包上传
      */
     public void syncCloud() throws AVException {
-        query.clearCachedResult();
+        query = AVQuery.getQuery(OneDay.class);
         //从云端抓取所有
         List<OneDay> daysInCloud = findAllFromCloud(0);
+
         //从本地抓取所有
         List<OneDay> daysInDB = findAllFromDB(0);
+
         //否则，比较更新
         for (int i = 0; i < daysInCloud.size(); i++) {
             OneDay cloud = daysInCloud.get(i);
@@ -292,10 +298,10 @@ public class OneDayDao extends BaseDao {
                     updateOrSaveInDB(cloud);
                     //本地并入云端
                     updateOrSaveInCloud(db);
-                    //删去两条记录,防止重复遍历
-                    daysInDB.remove(db);
-                    daysInCloud.remove(cloud);
                 }
+                //删去两条记录,防止重复遍历
+                daysInDB.remove(db);
+                daysInCloud.remove(cloud);
             }
         }
         //如果云端有剩余，更新到本地
@@ -320,6 +326,9 @@ public class OneDayDao extends BaseDao {
         //以较新版本作为新版本
         String version;
         Date dstDate = null, srcDate = null;
+        //如果版本一样，不需要
+        if (dst.getVersion().equals(src.getVersion()))
+            return;
         try {
             dstDate = sdf.parse(dst.getVersion());
             srcDate = sdf.parse(src.getVersion());
@@ -327,65 +336,56 @@ public class OneDayDao extends BaseDao {
             e.printStackTrace();
         }
         assert dstDate != null;
+        // 更新版本
         version = dstDate.after(srcDate) ?
                 dst.getVersion() : src.getVersion();
-        List<Record> records = new ArrayList<>();
+        List<Record> records = new ArrayList<>(); // 目标records链表
         List<Record> dstRecords = dst.getRecords();
+        Log.d("合并 dst size", String.valueOf(dstRecords.size()));
         List<Record> srcRecords = src.getRecords();
-        Log.d("src size is:", String.valueOf(src.getRecords().size()));
-        //如果新版本已经包含旧的版本，则覆盖合并
+        Log.d("合并 src size",String.valueOf(srcRecords.size()));
+        // 确定循环次数
         int count = dstRecords.size() > srcRecords.size() ?
-             srcRecords.size() : dstRecords.size();
+                srcRecords.size() : dstRecords.size();
         int i;
-        if (dstRecords.get(0).equals(srcRecords.get(0))) {
-             for (i = 0; i < count; i++) {
-                  Record dstRecord = dstRecords.get(i);
-                  Record srcRecord = srcRecords.get(i);
-                  if (!dstRecord.equals(srcRecord)) {
-                      records.add(i, dstRecord);
-                  } else {
-                      SimpleDateFormat compSdf = new SimpleDateFormat("HH:mm:ss");
-                      try {
-                           Date srcBeginTime = compSdf.parse(srcRecord.getBeginTime());
-                           Date dstBeginTime = compSdf.parse(dstRecord.getBeginTime());
-                           //将日期较晚的喝奶记录追加在后面
-                           if (srcBeginTime.after(dstBeginTime)) {
-                           records.add(i + 1, srcRecord);
-                           records.add(i, dstRecord);
-                           } else {
-                               records.add(i + 1, dstRecord);
-                               records.add(i, srcRecord);
-                           }
-
-                      } catch (ParseException e) {
-                           e.printStackTrace();
-                      }
+        // 两个有序链表合并为一个有序链表
+        int j = 0;
+        while( dstRecords.size()!=0
+                && srcRecords.size()!=0 ){
+            Log.d("merge test dst size is", String.valueOf(dstRecords.size()));
+            Log.d("merge test src size is", String.valueOf(srcRecords.size()));
+            Record dstRecord = dstRecords.get(0);
+            Record srcRecord = srcRecords.get(0);
+            if( dstRecord.equals(srcRecord) ){
+                records.add(j,dstRecord);
+                dstRecords.remove(0);
+                srcRecords.remove(0);
+            } else{
+                SimpleDateFormat compSdf = new SimpleDateFormat(RECORDS_COMP_FORMAT);
+                try {
+                    Date srcBeginTime = compSdf.parse(srcRecord.getBeginTime());
+                    Date dstBeginTime = compSdf.parse(dstRecord.getBeginTime());
+                    //追加日期较早的记录
+                    if (srcBeginTime.after(dstBeginTime)) {
+                        records.add(j,dstRecord);
+                        dstRecords.remove(0);
+                    } else {
+                        records.add(j,srcRecord);
+                        srcRecords.remove(0);
                     }
-                  }
-                  //剩余追加
-                  if (dstRecords.size() > count) {
-                      records.addAll(dstRecords.subList(i, dstRecords.size()));
-                  } else if (srcRecords.size() > count) {
-                      records.addAll(srcRecords.subList(i, srcRecords.size()));
-                  }
-                } else {
-                //否则链接合并
-                //dst端的版本较新
-            if (dstDate.after(srcDate)) {
-                records = srcRecords;
-                records.addAll(dstRecords);
-            }//更新目标的版本较新
-            else {
-                records = dstRecords;
-                records.addAll(srcRecords);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
+            j++;
         }
 
-        if (records.size() == 0) {
-            return;
+        //剩余追加
+        if (dstRecords.size() > 0) {
+            records.addAll(dstRecords.subList(0, dstRecords.size()));
+        } else if (srcRecords.size() > 0) {
+            records.addAll(srcRecords.subList(0, srcRecords.size()));
         }
-
-
         //合并后刷新版本
         dst.setVersion(version);
         dst.setRecords(records);

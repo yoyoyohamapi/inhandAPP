@@ -18,10 +18,15 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.avos.avoscloud.AVUser;
 import com.inhand.milk.App;
 import com.inhand.milk.R;
 import com.inhand.milk.activity.BabyInfoTestActivity;
+import com.inhand.milk.activity.FirstLanunchActivity;
+import com.inhand.milk.activity.MainActivity;
+import com.inhand.milk.activity.WelcomeActivity;
 import com.inhand.milk.entity.User;
+import com.inhand.milk.utils.PreJudgingTask;
 
 /**
  * LoginOptFragment
@@ -167,35 +172,12 @@ public class LoginOptFragment extends BaseFragment {
             //如果用户未登录，显示登录选项,否则
             // 根据用户是否含有宝宝判断是否需要进入宝宝信息填写
             if (App.logged()) {
-                new PreJudgingTask().execute();
+                Log.d("usersex", String.valueOf(AVUser.getCurrentUser(User.class).getSex()));
+                PreJudgingTask task=new PreJudgingTask(getActivity());
+                task.execute();
             }
             else
                 logo.startAnimation(logoInAnim);
-        }
-    }
-
-    /**
-     * 登陆后预判断任务
-     */
-    class PreJudgingTask extends AsyncTask {
-
-        @Override
-        protected Object doInBackground(Object[] params) {
-            int errorCode = App.getCurrentUser().hasBaby(getActivity());
-            switch (errorCode) {
-                case User.HAS_BABY:
-                    Log.d("User has baby", "has");
-                    break;
-                case User.NO_BABY:
-                    Log.d("User has baby", "none");
-                    break;
-                case User.NETWORK_ERROR:
-                    Log.d("User has baby", "network error");
-                    break;
-            }
-            getActivity().startActivity(
-                    new Intent(getActivity(), BabyInfoTestActivity.class));
-            return null;
         }
     }
 }
