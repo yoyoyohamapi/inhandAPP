@@ -12,7 +12,7 @@ public class AmountStatistics extends BaseStatistics{
 	protected void setTitle() {
 		// TODO Auto-generated method stub
 		String title =  getResources().getString(R.string.milk_title_text);
-		setTitleview(title, 1);
+		setTitleview(title, 1,null,null);
 	}
 
 	@Override

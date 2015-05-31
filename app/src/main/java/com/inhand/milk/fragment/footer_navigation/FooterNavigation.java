@@ -1,12 +1,5 @@
 package com.inhand.milk.fragment.footer_navigation;
 
-import com.inhand.milk.R;
-import com.inhand.milk.fragment.bluetooth.bluetooth_fragment;
-import com.inhand.milk.fragment.health.HealthFragment;
-import com.inhand.milk.fragment.home.HomeFragment;
-import com.inhand.milk.fragment.temperature_amount.AmountStatistics;
-import com.inhand.milk.fragment.temperature_amount.TemperatureStatistics;
-
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
@@ -15,13 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import com.inhand.milk.R;
+import com.inhand.milk.fragment.health.HealthFragment;
+import com.inhand.milk.fragment.home.HomeFragment;
+import com.inhand.milk.fragment.temperature_amount.AmountStatistics;
+import com.inhand.milk.fragment.temperature_amount.TemperatureStatistics;
 
 public class FooterNavigation extends Fragment {
 
 	private View view;
 	private TemperatureStatistics tempreture;
 	private AmountStatistics amount;
-	private bluetooth_fragment bluetooth;
 	private HomeFragment home;
 	private HealthFragment health;
 	private FooterButtonsManager buttonsManager ;

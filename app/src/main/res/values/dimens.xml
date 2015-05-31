@@ -38,6 +38,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">0dp</dimen>
     <dimen name="activity_vertical_margin">0dp</dimen>
+    <dimen name="corner_radius">20dp</dimen>
 
     <!-- main_title -->
     <dimen name="main_title_height">75dp</dimen>
@@ -115,6 +116,7 @@
     <dimen name="health_nutrition_time_navigation_height">40dp</dimen>
     <dimen name="health_nutrition_time_now_text_size">15sp</dimen>
 
+
     <!-- home fragment  -->
     <dimen name="home_advise_layout_width">105dp</dimen>
     <dimen name="home_advise_layout_height">120dp</dimen>
@@ -186,20 +188,20 @@
     <dimen name="first_lanunch_parents_select_icon_width">40dp</dimen>
     <dimen name="first_lanunch_babysex_text_icon_width">80dp</dimen>
     <dimen name="first_lanunch_babysex_text_icon_height">30dp</dimen>
-    <dimen name="first_lanunch_babyinfo_text_size">20sp</dimen>
+    <dimen name="first_lanunch_babyinfo_text_size">20dp</dimen>
     <dimen name="first_lanunch_babysex_edittext_height">50dp</dimen>
     <dimen name="first_lanunch_babyinfo_icon_height">100dp</dimen>
     <dimen name="first_lanunch_babyinfo_icon_width">100dp</dimen>
     <dimen name="first_lanunch_selected_icon_height">30dp</dimen>
-    <dimen name="first_lanunch_weight_num_text_size">40sp</dimen>
-    <dimen name="first_lanunch_weight_unit_text_size">20sp</dimen>
+    <dimen name="first_lanunch_weight_num_text_size">40dp</dimen>
+    <dimen name="first_lanunch_weight_unit_text_size">20dp</dimen>
     <dimen name="first_lanunch_weight_girl_boy_icon_width">120dp</dimen>
     <dimen name="first_lanunch_weight_girl_boy_icon_height">200dp</dimen>
-    <dimen name="first_lanunch_weight_ruler_height">100dp</dimen>
+    <dimen name="first_lanunch_weight_ruler_height">80dp</dimen>
     <dimen name="first_lanunch_weight_ruler_margin">10dp</dimen>
     <dimen name="first_lanunch_weight_ruler_container_container_height">150dp</dimen>
     <dimen name="first_lanunch_weight_ruler_jt_margin_bottom">-10dp</dimen>
-    <dimen name="first_lanunch_weight_ruler_jt_height">40dp</dimen>
+    <dimen name="first_lanunch_weight_ruler_jt_height">20dp</dimen>
     <!-- 这个必须是 first_lanunch_weight_girl_boy_icon_height 和 first_lanunch_weight_ruler_container_container_height的和-->
     <dimen name="first_lanunch_height_choose_height">350dp</dimen>
     <dimen name="first_lanunch_height_ruler_width">80dp</dimen>
@@ -208,10 +210,92 @@
     <dimen name="first_lanunch_head_up_part_height">120dp</dimen>
     <dimen name="first_lanunch_head_down_part_height">230dp</dimen>
     <dimen name="first_lanunch_milk_icon_width">80dp</dimen>
-    <dimen name="first_launch_milk_icons_container_width">140dp</dimen>
+    <dimen name="first_lanunch_milk_icon_height">110dp</dimen>
+    <dimen name="first_lanunch_milk_icon_margin">-30dp</dimen>
     <dimen name="first_launch_milk_icons_container_height">160dp</dimen>
     <dimen name="first_launch_milk_text_container_height">100dp</dimen>
     <dimen name="first_launch_milk_text_height">60dp</dimen>
-    <dimen name="first_launch_milk_text_size">20sp</dimen>
-    <dimen name="first_launch_milk_doc_text_size">15sp</dimen>
+    <dimen name="first_launch_milk_text_size">20dp</dimen>
+    <dimen name="first_launch_milk_doc_text_size">15dp</dimen>
+
+    <!-- utils BluetoothPaired -->
+    <dimen name="utils_BluetoothPaired_margin">10dp</dimen>
+    <dimen name="bluetooth_paired_listview_item_height">40dp</dimen>
+    <dimen name="bluetooth_paired_listview_item_leftmargin">10dp</dimen>
+    <dimen name="bluetooth_paired_listview_item_margin_right">3dp</dimen>
+    <dimen name="bluetooth_paired_listview_item_margin_left">3dp</dimen>
+    <dimen name="bluetooth_paired_listview_item_left_text_size">14dp</dimen>
+    <dimen name="bluetooth_paired_listview_item_right_text_size">16dp</dimen>
+    <dimen name="bluetooth_paired_title_height">80dp</dimen>
+    <dimen name="bluetooth_paired_text_margin_top">20dp</dimen>
+    <dimen name="bluetoot_paired_listview_item_margin_right_icon">5dp</dimen>
+
+    <!-- baby info activity -->
+    <dimen name="baby_info_activity_title_text_size">20sp</dimen>
+    <dimen name="baby_info_activity_icon_height">30dp</dimen>
+    <dimen name="baby_info_activity_icon_margin_left">40sp</dimen>
+    <dimen name="baby_info_activity_icon_container_height">60sp</dimen>
+    <dimen name="baby_info_activity_sex_textview_height">40dp</dimen>
+    <dimen name="baby_info_activity_sex_textview_width">80dp</dimen>
+    <dimen name="baby_info_activity_textview_height">40dp</dimen>
+    <dimen name="baby_info_activity_textview_text_size">20sp</dimen>
+    <dimen name="baby_info_activity_button_margin_bottom">30dp</dimen>
+
+    <!-- health  prompt -->
+    <dimen name="health_prompt_listview_item_top_height">40dp</dimen>
+    <dimen name="health_prompt_listview_item_circle_r">20dp</dimen>
+    <dimen name="health_prompt_listview_item_margin_left_icon">5dp</dimen>
+    <dimen name="health_prompt_listview_item_margin_right">5dp</dimen>
+    <dimen name="health_prompt_listview_text_size">20dp</dimen>
+    <dimen name="health_prompt_listview_item_doc_textsize">20dp</dimen>
+    <dimen name="health_prompt_listview_item_corner_radius">8dp</dimen>
+    <dimen name="health_prompt_listview_margin_left">10dp</dimen>
+    <dimen name="health_prompt_listview_item_num_text_width">80dp</dimen>
+    <dimen name="health_prompt_listview_item_long_text_margin_left_right">15dp</dimen>
+    <dimen name="health_prompt_listview_item_long_text_maring_top">10dp</dimen>
+
+    <!--milk_amount -->
+    <dimen name="milk_amount_advise_height" >200dp</dimen>
+    <dimen name="milk_amount_advise_title_total_height">80dp</dimen>
+    <dimen name="milk_amount_advise_text_margin_left">10dp</dimen>
+    <dimen name="milk_amount_advise_text_size">15dp</dimen>
+    <dimen name="milk_amount_advise_ring_text_up_size">5dp</dimen>
+    <dimen name="milk_amount_advise_ring_text_down_size">20dp</dimen>
+    <dimen name="milk_amount_advise_ring_size_D">60dp</dimen>
+    <dimen name="milk_amount_advise_margin_right">20dp</dimen>
+    <dimen name="milk_amount_advise_bottom_height">20dp</dimen>
+    <dimen name="milk_amount_vertical_line_width">5dp</dimen>
+    <dimen name="milk_amount_line_margin_left">15dp</dimen>
+    <dimen name="millk_amount_listview_title_height">40dp</dimen>
+    <dimen name="milk_amount_circle_D">20dp</dimen>
+    <dimen name="milk_amount_circle_margin_left">7.5dp</dimen>
+    <dimen name="milk_amount_time_text_marging_left">15dp</dimen>
+    <dimen name="milk_amount_text_total_margin_right">15dp</dimen>
+    <dimen name="milk_amount_listview_item_divider_marging_left">50dp</dimen>
+    <dimen name="milk_amount_listview_item_divider_height">1dp</dimen>
+    <dimen name="milk_amount_listview_title_text_size">13dp</dimen>
+    <dimen name="milk_amount_listview_item_height">100dp</dimen>
+    <dimen name="milk_amount_listview_item_margin_bottom">15dp</dimen>
+    <dimen name="milk_amount_listview_item_progress_bar_height">20dp</dimen>
+    <dimen name="milk_amount_listview_item_progress_bar_corner_radiuas">20dp</dimen>
+    <dimen name="milk_amount_listview_item_progress_bar_width">200dp</dimen>
+    <dimen name="milk_amount_listview_list_progress_bar_margin_left">15dp</dimen>
+    <dimen name="milk_amount_listview_item_time_text_size">20dp</dimen>
+    <dimen name="milk_amount_listview_item_temperature_amount_parent_height">20dp</dimen>
+    <dimen name="milk_amount_listview_item_temperature_amount_parent_margin_bottom">10dp</dimen>
+    <dimen name="milk_amount_listview_item_temperature_amount_text_size">10dp</dimen>
+    <dimen name="milk_amount_listview_item_divider_temperature_amount_line_width">3dp</dimen>
+    <dimen name="milk_amount_listview_item_temperature_amount_parent_width">100dp</dimen>
+    <dimen name="milk_amount_listview_item_circle_D">30dp</dimen>
+    <dimen name="milk_amount_listview_item_circle_up_text_size">10dp</dimen>
+    <dimen name="milk_amount_listview_item_circle_down_text_size">7dp</dimen>
+    <dimen name="milk_amount_listview_item_circle_margin_right">10dp</dimen>
+    <dimen name="milk_amount_listview_item_title_time_text_width">100dp</dimen>
+    <array name="milk_amount_listview_item_title_circle_weights">
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+    </array>
+
+
 </resources>

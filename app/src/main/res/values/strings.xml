@@ -121,4 +121,35 @@
     <string name="first_launch_choose_milk_info">宝宝的奶粉</string>
     <string name="first_launch_choose_milk_text">请选择宝宝的奶粉</string>
     <string name="first_launch_choose_milk_doc">选择奶粉的重要性，点这里</string>
+
+    <!-- baby info activity -->
+    <string name="baby_info_activity_baby_title_text">宝宝信息</string>
+    <string name="baby_info_activity_baby_sex">宝宝性别：</string>
+    <string name="baby_info_activity_baby_sex_boy">男孩</string>
+    <string name="baby_info_activity_baby_sex_girl">女孩</string>
+    <string name="baby_info_activity_baby_date">宝宝生日：</string>
+    <string name="baby_info_activity_baby_date_hint_text">请选择日期</string>
+    <string name="baby_info_activity_baby_name">宝宝昵称：</string>
+    <string name="baby_info_activity_baby_name_hint_text">请输入宝宝名称</string>
+
+    <!--health prompt-->
+    <string name="health_prompt_title">健康提示</string>
+    <string-array name="health_prompt_listview_item_doc">
+        <item >高温冲调奶粉</item>
+        <item >宝宝高温饮奶</item>
+        <item >宝宝低温饮奶</item>
+    </string-array>
+    <string-array name="health_prompt_listview_item_long_doc">
+        <item >如果水温过高，回使奶粉结块，无法充分溶解，还会是奶粉中的蛋白质凝结，如果水温过高，回使奶粉结块，无法充分溶解，还会是奶粉中的蛋白质凝结如果水温过高，回使奶粉结块，无法充分溶解，还会是奶粉中的蛋白质凝结</item>
+        <item >宝宝高温饮奶宝宝高温饮奶宝宝高温饮奶宝宝高奶宝宝高温饮奶宝宝高温饮奶宝宝高温饮奶宝宝高温饮奶宝宝高温饮奶宝宝高温饮奶宝宝高温饮奶</item>
+        <item >宝宝低温饮奶宝宝低温饮奶宝宝低温饮奶宝宝低温饮奶宝宝低温饮奶宝宝低温饮奶宝宝低温饮奶宝宝低温饮奶</item>
+    </string-array>
+    <string name="health_prompt_listview_item_total">你共有</string>
+
+    <!--milk amount -->
+    <string name="milk_amount_title">饮奶统计</string>
+    <string name="milk_amount_drink_num_doc">宝宝今天喝奶：</string>
+    <string name="milk_amount_advise_num_doc">小兜建议喝奶：</string>
+    <string name="milk_amount_advise_ring_up_doc">今天已经完成</string>
+    <string name="milk_amount_drink_total_num_doc">饮奶次数:</string>
 </resources>

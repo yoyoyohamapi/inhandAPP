@@ -1,20 +1,18 @@
 package com.inhand.milk.fragment.temperature_amount.details;
 
-import java.util.List;
-
-import com.inhand.milk.R;
-import com.inhand.milk.fragment.temperature_amount.details.DetailsFragment.ItemEntity;
-import com.inhand.milk.fragment.temperature_amount.details.PinnedHeaderListView.HeadViewManager;
-
-import android.R.bool;
 import android.content.Context;
-import android.graphics.Picture;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.inhand.milk.R;
+import com.inhand.milk.fragment.temperature_amount.details.DetailsFragment.ItemEntity;
+import com.inhand.milk.fragment.temperature_amount.details.PinnedHeaderListView.HeadViewManager;
+
+import java.util.List;
 
 public class PinnedListViewAdapter extends  BaseAdapter implements HeadViewManager{
 	
@@ -131,7 +129,6 @@ public class PinnedListViewAdapter extends  BaseAdapter implements HeadViewManag
 		if(currentTitle.equals(nextTitle))
 			return false;
 		return true;
-		
 	}
 	@Override
 	public int getHeadViewState(int position) {
@@ -150,7 +147,7 @@ public class PinnedListViewAdapter extends  BaseAdapter implements HeadViewManag
 		// TODO Auto-generated method stub
 		ItemEntity itemEntity = mData.get(position);
 		String title = itemEntity.getTitle();
-		if (	!title.equals("") ) {
+		if (!title.equals("") ) {
 			TextView textView = (TextView)view.findViewById(R.id.details_content_header_date);
 			textView.setText(title);
 		}
@@ -163,7 +160,6 @@ public class PinnedListViewAdapter extends  BaseAdapter implements HeadViewManag
         TextView time;
         View  titleLayout;
         View  layoutLine;
-        
     }
 	
 	

@@ -1,10 +1,6 @@
 package com.inhand.milk.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.animation.Animator;
-import android.animation.TimeInterpolator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -12,35 +8,34 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.TranslateAnimation;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HealthNutritionDisk extends ViewGroup {
 	
-	private int[] colors = {Color.rgb(0, 255, 0),Color.rgb(255, 0, 0),Color.rgb(0, 0, 255)};
+	private int[] colors = {Color.rgb(0, 255, 0),Color.rgb(255, 0, 0),Color.rgb(0, 0, 255),Color.rgb(232,4,44)};
 	private float[][]  radians = {{0,100},{100,200},{200,360}};
 	private List<View> views = new ArrayList<View>();
 	private int innerCircleColor = Color.rgb(255,255,255);
-	float outerCircleR ;
-	float innerCircleR ;
-	float sweepAngleOffset = 0;
-	int lastIndex = -1;
-	int currentIndex = -1;
-	float distanceMoveDown = 20;
-    String[] centerText = {"总摄入","368克","查看详情"};
-    String[] centerText2 = {"总摄入","390克","查看详情"};
-	public HealthNutritionDisk(Context context ,float r) {
+	private float outerCircleR,innerCircleR ,sweepAngleOffset = 0;
+	private int lastIndex = -1,currentIndex = -1;
+	private float distanceMoveDown = 20;
+    private List<String[]>  centerTexts;
+	public HealthNutritionDisk(Context context ,float r,float[] weight,List<String []> text) {
 		// TODO Auto-generated constructor stub
 		super(context);
 		outerCircleR = r;
 		innerCircleR = r / 2;
 		Sector view;
-		int length = colors.length;
+		int length = weight.length;
+        createRidans(weight);
+        centerTexts = text;
 		for (int i = 0 ;i< length ;i++){
 			view = new Sector(context, outerCircleR, colors[i], radians[i][0], radians[i][1]);
 			this.addView(view);
@@ -48,19 +43,36 @@ public class HealthNutritionDisk extends ViewGroup {
 			views.add(view);
 		}
 		this.addView(new MyCircle(context, innerCircleR, innerCircleColor));
-		this.addView(new MyText(getContext(), innerCircleR, centerText[0],
-				centerText[1], centerText[2]) );
+
+		//this.addView(new MyText(getContext(), innerCircleR, centerText[0],
+		//		centerText[1], centerText[2]) );
+        this.addView(new MyText(getContext(), innerCircleR,null,null,null));
 		setClickEvent();
 		setObjectAnimation();
 		
 		currentIndex = 0;
 		sweepAngleOffset = 90 - ( radians[0][0] + radians[0][1] )/2;
+        sweepAngleOffset = sweepAngleOffset<0?sweepAngleOffset+360:sweepAngleOffset;
 		this.setRotation(  sweepAngleOffset);
 		startMoveDown(0, 0);
 		addMyText();
 	}
-	
-	private void removeMyText(){
+	private void createRidans(float[] weight){
+        int i;
+        float sum=0;
+        for(i=0;i<weight.length;i++){
+            sum += weight[i];
+        }
+        radians = new float[weight.length][2];
+        radians[0][0] = 0;
+        for(i=0;i<weight.length;i++){
+            radians[i][1] = 360/sum*weight[i] + radians[i][0];
+            if (i != weight.length-1)
+                 radians[i+1][0] = radians[i][1];
+        }
+    }
+
+    private void removeMyText(){
 		int count  = getChildCount();
 		View child =getChildAt(count -1);
 		if (child instanceof MyText)
@@ -71,7 +83,14 @@ public class HealthNutritionDisk extends ViewGroup {
 		View child =getChildAt(count -1);
 		if(  child instanceof MyText ){
 			child.setVisibility(View.VISIBLE);
-			((MyText) child).changeStrings(centerText2[0], centerText2[1], centerText2[2]);
+			//((MyText) child).changeStrings(centerText2[0], centerText2[1], centerText2[2]);
+            if (centerTexts == null) {
+                return;
+            }
+            String[] str;
+            str = centerTexts.get(currentIndex);
+            if (str != null && str.length ==3)
+                ((MyText) child).changeStrings(str[0], str[1], str[2]);
 			child.setRotation(-sweepAngleOffset);
 		}
 	}
@@ -81,10 +100,16 @@ public class HealthNutritionDisk extends ViewGroup {
  	private int whoClicked(float x, float y){
  		float absX = x - outerCircleR;
  		float absY = - ( y - outerCircleR );
- 		Log.i("evet.get x y",String.valueOf(absX) + " "+String.valueOf(absY));
+ 		//Log.i("evet.get x y",String.valueOf(absX) + " "+String.valueOf(absY));
  		float distance =  (float) Math.sqrt( absX * absX + absY *absY);
  		if (distance < innerCircleR || distance > outerCircleR)
  			return -1;
+        float sweep = 90 -radians[currentIndex][0]/2 - radians[currentIndex][1]/2;
+         sweep = sweep<0 ? 360 + sweep : sweep;
+       // Log.i("sweep",String.valueOf(sweep));
+        //Log.i("rotation",String.valueOf(getRotation()));
+        if (this.getRotation() >  sweep+0.001 || this.getRotation() < sweep -0.001)
+            return -1;
  		float atan = (float) (Math.atan( absY /absX));
  		atan = radianToAngle(atan);
  		atan = Math.abs(atan);
@@ -103,9 +128,8 @@ public class HealthNutritionDisk extends ViewGroup {
  			atan  = atan +360;
  		else if (atan > 360)
  			atan = atan -360;
- 		int count = radians.length;
- 		Log.i("length of 2dimen", String.valueOf(count));
- 		for (int i= 0; i<count;i++){
+
+ 		for (int i= 0; i<radians.length;i++){
  			if (atan >= radians[i][0] && atan <= radians[i][1]){
  				currentIndex = i;
  				return i;
@@ -121,9 +145,9 @@ public class HealthNutritionDisk extends ViewGroup {
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
 				if (event.getAction() == MotionEvent.ACTION_UP){
-					//Log.i("evet.get x y",String.valueOf(event.getX()) + " "+String.valueOf(event.getY()));
+					//Log.i("evet.get x y", String.valueOf(event.getX()) + " " + String.valueOf(event.getY()));
 					int index = whoClicked(event.getX(), event.getY());
-					Log.i("index",String.valueOf(index) );
+					//Log.i("index",String.valueOf(index) );
 					if (index == -1)
 						return true;
 					if (index == lastIndex)
@@ -135,14 +159,16 @@ public class HealthNutritionDisk extends ViewGroup {
 				return true;	
 			}
 		};
-		this.setOnTouchListener(onTouchListener);	
+		this.setOnTouchListener(onTouchListener);
 	}
 	
 	
 	private void startMoveDown(int index,int time){
-		if (radians[index][1] - radians[index][0] >180)
-			return;
-		
+        addMyText();
+        lastIndex = index;
+
+        if (radians[index][1] - radians[index][0] >180)
+            return;
 		//RotateAnimation rAnimation = new RotateAnimation(this.getRotation(), toDegrees, pivotXType, pivotXValue, pivotYType, pivotYValue)
 		View view = views.get(index);
 		float angle = (radians[index][0] + radians[index][1] )/2;
@@ -150,13 +176,12 @@ public class HealthNutritionDisk extends ViewGroup {
 		angle = (float) (angle /180 *Math.PI);
 		float x = (float)  (distanceMoveDown *Math.cos( angle) );
 		float y = (float)  (distanceMoveDown *Math.sin( angle) );
-		Log.i("x  or y ", String.valueOf(x )+" "+String.valueOf(y));
+		//.i("x  or y ", String.valueOf(x )+" "+String.valueOf(y));
 		TranslateAnimation translateAnimation = new TranslateAnimation(0, x, 0, y);
 		translateAnimation.setFillAfter(true);
 		translateAnimation.setDuration(time);
 		view.startAnimation(translateAnimation);
-		addMyText();
-		lastIndex = index;	
+
 	}
 	
 	private ObjectAnimator oAnimator ;
@@ -171,19 +196,23 @@ public class HealthNutritionDisk extends ViewGroup {
 			views.get(lastIndex).clearAnimation();
 		float centerAngle = (radians[index][0] + radians[index][1])/2 ;
 		float time = 90 - centerAngle;
+        time  = time<0?time+360:time;
 		sweepAngleOffset = time;
 		float rotate = this.getRotation();
+        /*
 		if (time < this.getRotation()) 
 			time = (int)( (rotate - time)/360+1 )*360 + time;
+			*/
 		oAnimator.setFloatValues(time);
 		oAnimator.setInterpolator(new AccelerateDecelerateInterpolator() );
-		oAnimator.setDuration( (int)(time - rotate) * 10);
+		oAnimator.setDuration( (int)Math.abs(time - rotate) * 10);
 		AnimatorListener listener = new AnimatorListener() {
 			
 			@Override
 			public void onAnimationStart(Animator animation) {
-				// TODO Auto-generated method stub
-				
+				// TODO Autoa-generated method stub
+
+
 			}
 			
 			@Override
@@ -196,6 +225,8 @@ public class HealthNutritionDisk extends ViewGroup {
 			public void onAnimationEnd(Animator animation) {
 				// TODO Auto-generated method stub
 				startMoveDown(currentIndex,300);
+
+
 			}
 			
 			@Override
@@ -217,7 +248,7 @@ public class HealthNutritionDisk extends ViewGroup {
 			child = getChildAt(i);
 			child.measure(widthMeasureSpec, heightMeasureSpec);
 		}
-		setMeasuredDimension((int)(outerCircleR *2 +1), (int)(outerCircleR * 2 + 1 + distanceMoveDown * 2 ));
+		setMeasuredDimension((int)(outerCircleR *2 +1+distanceMoveDown * 2), (int)(outerCircleR * 2 + 1 + distanceMoveDown * 2 ));
 	}
 
 
@@ -229,7 +260,7 @@ public class HealthNutritionDisk extends ViewGroup {
 		View child ;
 		for(int i = 0 ;i < count; i++){
 			child = getChildAt(i);
-			child.layout(0, offset, child.getMeasuredWidth(), 
+			child.layout(offset, offset, child.getMeasuredWidth()+offset,
 					child.getMeasuredHeight() + offset );
 		//	Log.i("health_nutrition", String.valueOf(i)+":"+String.valueOf(child.getMeasuredWidth()));
 		}
@@ -237,11 +268,11 @@ public class HealthNutritionDisk extends ViewGroup {
 		child = getChildAt(count);
 		int leftTop =  (int) (outerCircleR - innerCircleR);
 		int rightBottome = (int)(outerCircleR + innerCircleR);
-		child.layout( leftTop,leftTop + offset,rightBottome,rightBottome +offset );
+		child.layout( leftTop+offset,leftTop + offset,rightBottome+offset,rightBottome +offset );
 		
 		if (getChildCount() == count +2){
 			child = getChildAt(count + 1);
-			child.layout( leftTop,leftTop + offset,rightBottome,rightBottome +offset );
+			child.layout( leftTop+offset,leftTop + offset,rightBottome+offset,rightBottome +offset );
 		}
 	}
 	
@@ -333,6 +364,7 @@ public class HealthNutritionDisk extends ViewGroup {
 			uperText = string1;
 			middleText = string2;
 			bottomText = string3;
+
 		}
 
 		@Override
@@ -352,15 +384,18 @@ public class HealthNutritionDisk extends ViewGroup {
 			
 			y = 0.35f * width;
 			paint.setTextSize(uperTextSize);
-			canvas.drawText(uperText, r - paint.measureText(uperText)/2, y, paint);
+            if (uperText !=null)
+			    canvas.drawText(uperText, r - paint.measureText(uperText)/2, y, paint);
 			
 			y = 0.55f * width;
 			paint.setTextSize(middleTextSize);
-			canvas.drawText(middleText, r - paint.measureText(middleText)/2, y, paint);
+            if (middleText !=null)
+			    canvas.drawText(middleText, r - paint.measureText(middleText)/2, y, paint);
 			
 			y = 0.7f * width;
 			paint.setTextSize(bottomTextSize);
-			canvas.drawText(bottomText, r - paint.measureText(bottomText)/2, y, paint);
+            if (bottomText !=null)
+			    canvas.drawText(bottomText, r - paint.measureText(bottomText)/2, y, paint);
 		}
 		
 		public void changeStrings(String string1 ,String string2 ,String string3){

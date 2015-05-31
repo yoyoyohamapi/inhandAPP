@@ -1,28 +1,33 @@
 package com.inhand.milk.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import android.app.AlertDialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.app.AlertDialog.Builder;
 import com.inhand.milk.R;
 import com.inhand.milk.fragment.bluetooth.Bluetooth;
 import com.inhand.milk.fragment.footer_navigation.FooterNavigation;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import android.util.Log;
-import android.view.View.OnClickListener;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 /**
  *
  * @author Administrator
  *主要的activity，管理进入app后的几个fragment
  */
+
 
 public class MainActivity extends BaseActivity {
 
@@ -43,7 +48,7 @@ public class MainActivity extends BaseActivity {
 
         // bluetooth = new Bluetooth(this);
         // bluetooth.openBlue();
-        //bluetooth.startSearch();   
+        //bluetooth.startSearch();
         setSlidingMenu();
 
     }
@@ -119,13 +124,6 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public  void visibleButtons(){
-        findViewById(R.id.Activity_buttons_fragments_container).setVisibility(View.VISIBLE);
-    }
-
-    public void inVisibleButtons(){
-        findViewById(R.id.Activity_buttons_fragments_container).setVisibility(View.GONE);
-    }
     public Bluetooth getBluetooth(){
         return bluetooth;
     }
@@ -139,5 +137,29 @@ public class MainActivity extends BaseActivity {
             bluetooth.ShutConnect();
     }
 
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        AlertDialog alert = new Builder(MainActivity.this).create();
+        alert.setMessage("确认退出吗？");
+        alert.setTitle("提示");
+        alert.setButton(DialogInterface.BUTTON_POSITIVE, "确定", new DialogInterface.OnClickListener() {
 
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                finish();
+            }
+        });
+
+        alert.setButton(DialogInterface.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+        alert.show();
+    }
 }

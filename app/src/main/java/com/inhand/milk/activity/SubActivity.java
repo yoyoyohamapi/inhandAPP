@@ -1,7 +1,6 @@
 package com.inhand.milk.activity;
 
 import com.inhand.milk.R;
-import com.inhand.milk.fragment.health.nutrition.Nutrition;
 
 import android.app.Fragment;
 import android.app.FragmentManager;

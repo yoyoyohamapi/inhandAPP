@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" useUTFGuessing="false" native2AsciiForPropertiesFiles="false">
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/inhand/milk/activity/FirstLanunchActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/inhand/milk/dao/BabyDao.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/inhand/milk/dao/UserDao.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/inhand/milk/fragment/BabyInfoFragment.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/inhand/milk/fragment/LoginDetailsFragment.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/inhand/milk/fragment/LoginOptFragment.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/login_details_icon_password.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/login_details_icon_user.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/register_btn_submit.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/register_btn_to_login.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/register_icon_auth_code.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/register_icon_phone.png" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/register_title.png" charset="UTF-8" />
-  </component>
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
 </project>
 

@@ -1,6 +1,7 @@
 package com.inhand.milk.activity;
 
 import android.support.v4.app.FragmentActivity;
+import android.util.DisplayMetrics;
 
 import com.inhand.milk.fragment.BackHandleFragment;
 
@@ -36,6 +37,10 @@ public class BaseActivity extends FragmentActivity
                 getSupportFragmentManager().popBackStack();
         }
     }
-
+    public int getWindowWidth(){
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        return dm.widthPixels;
+    }
 
 }

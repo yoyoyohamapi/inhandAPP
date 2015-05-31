@@ -1,17 +1,5 @@
 package com.inhand.milk.fragment.health;
 
-import java.security.PublicKey;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.inhand.milk.R;
-import com.inhand.milk.activity.HealthNutritionActivity;
-import com.inhand.milk.activity.MainActivity;
-import com.inhand.milk.fragment.TitleFragment;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,9 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import com.inhand.milk.R;
+import com.inhand.milk.activity.HealthNutritionActivity;
+import com.inhand.milk.fragment.TitleFragment;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HealthFragment extends TitleFragment{
 	private ListView listView;
@@ -33,7 +29,7 @@ public class HealthFragment extends TitleFragment{
 		// TODO Auto-generated method stub
 		mView  = inflater.inflate(R.layout.health,null);
 		
-		setTitleview(getString(R.string.health_title_text), 0);
+		setTitleview(getString(R.string.health_title_text), 0,null,null);
 		setListView();
 		setListViewClick();
 		return mView;

@@ -1,19 +1,15 @@
 package com.inhand.milk.fragment.home;
 
-import com.inhand.milk.R;
-import com.inhand.milk.activity.MainActivity;
-import com.inhand.milk.fragment.TitleFragment;
-import com.inhand.milk.utils.firstlanunch.SmallDotsTab;
-
-import android.app.Fragment;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.inhand.milk.R;
+import com.inhand.milk.fragment.TitleFragment;
 
 public class HomeFragment extends TitleFragment{
 	
@@ -25,7 +21,7 @@ public class HomeFragment extends TitleFragment{
             Bundle savedInstanceState) {  
         // ---Inflate the layout for this fragment---  
         mView = inflater.inflate(R.layout.home, container, false);
-        setTitleview(getString(R.string.home_title_text), 0);
+        setTitleview(getString(R.string.home_title_text), 0,null,null);
         setHome(mView);
         return mView;
     }  

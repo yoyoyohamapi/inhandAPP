@@ -1,14 +1,17 @@
 package com.inhand.milk.fragment.temperature_amount.details;
 
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import android.app.FragmentTransaction;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.inhand.milk.R;
-import com.inhand.milk.activity.MainActivity;
 import com.inhand.milk.dao.BaseDao;
 import com.inhand.milk.dao.OneDayDao;
 import com.inhand.milk.entity.KeyPoint;
@@ -18,20 +21,10 @@ import com.inhand.milk.fragment.TitleFragment;
 import com.inhand.milk.fragment.temperature_amount.details_once.DetailsOnceFragment;
 import com.inhand.milk.helper.DateHelper;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
-import android.widget.TextView;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class DetailsFragment  extends TitleFragment{
 
@@ -45,9 +38,9 @@ public class DetailsFragment  extends TitleFragment{
 		// TODO Auto-generated method stub
 		mView  = inflater.inflate(R.layout.temperature_amount_details,container, false);
 		if (!isTemperature)
-			setTitleview(getString(R.string.details_milk_title_string), 2);
+			setTitleview(getString(R.string.details_milk_title_string), 2,null,null);
 		else 
-			setTitleview(getString(R.string.details_temperature_title_string), 2);
+			setTitleview(getString(R.string.details_temperature_title_string), 2,null,null);
 		listView = (PinnedHeaderListView)mView.findViewById(R.id.detals_listView);
 		listView.setHeadView(getHeadView());
 		getData();

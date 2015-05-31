@@ -90,9 +90,52 @@
     <color name="small_dots_noselect_color">#c8c8c8</color>
     <color name="ruler_color">#61e5b8</color>
 
-
     <!-- first launch  -->
     <color name="first_launch_title_color">#f1f16b</color>
     <color name="first_launch_text_bakcground_color">#77ffff</color>
     <color name="first_launch_text_color">#00ff00</color>
+
+    <!-- baby info activity -->
+    <color name="baby_info_activity_select_sex_color">#ff0000</color>
+    <color name="baby_info_activity_noselect_sex_color">#00ff00</color>
+    <color name="baby_info_activity_textview_background_color">#c8c8c8</color>
+
+    <!-- health prompt-->
+    <array name="health_prompt_listview_item_text_doc_colors">
+        <item>#ff0000</item>
+        <item>#00ff00</item>
+        <item>#c8c8c8</item>
+    </array>
+    <array name="health_prompt_listview_item_num_doc_colors">
+        <item>#ff00ff</item>
+        <item>#00ffff</item>
+        <item>#c8c8ff</item>
+    </array>
+    <array name="health_prompt_listview_item_num_long_doc_colors">
+        <item>#3300ff</item>
+        <item>#443322</item>
+        <item>#33c8ff</item>
+    </array>
+
+    <!--milk_amount -->
+    <color name="milk_amount_line_color">#000000</color>
+    <color name="milk_amount_ring_bg_color">#ffffff</color>
+    <color name="milk_amount_ring_color">#000000</color>
+    <color name="milk_amount_listview_item_title_bg_color">#c8c8c8</color>
+    <color name="milk_amount_ring_text_color">#ffffff</color>
+    <color name="milk_amount_time_text_color">#000000</color>
+    <color name="milk_amount_total_num_text_color">#000000</color>
+    <color name="milk_amount_listview_item_time_text_color">#000000</color>
+    <color name="milk_amount_listview_item_progress_bar_background_color">#c8c800</color>
+    <color name="milk_amount_listview_list_tempereture_amount_text_color">#000000</color>
+    <color name="milk_amount_listview_list_divider_color">#000000</color>
+    <color name="milk_amount_listview_list_warining_high_tempreature_color">#ff0000</color>
+    <color name="milk_amount_listview_list_warining_low_tempreature_color">#00ff00</color>
+    <color name="milk_amount_listview_list_normal_tempreature_color">#0000ff</color>
+    <array name="milk_amount_listview_list_item_circle_colors">
+        <item>#3300ff</item>
+        <item>#443322</item>
+        <item>#33c8ff</item>
+    </array>
+
 </resources>

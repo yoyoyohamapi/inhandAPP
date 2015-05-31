@@ -24,7 +24,7 @@
                 android:id="@+id/LinearLayout1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="6"
+                android:layout_weight="4"
                 android:orientation="vertical" >
 
                 <RelativeLayout
@@ -36,8 +36,7 @@
                         android:id="@+id/RelativeLayout1"
                         android:layout_width="@dimen/first_lanunch_weight_girl_boy_icon_width"
                         android:layout_height="fill_parent"
-                        android:layout_alignParentRight="true"
-                        android:orientation="vertical" >
+                        android:layout_alignParentRight="true" >
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -46,11 +45,12 @@
 
                             <TextView
                                 android:id="@+id/first_launch_height_num_textview"
-                                android:layout_width="wrap_content"
+                                android:layout_width="80dp"
                                 android:layout_height="wrap_content"
                                 android:text="0.0"
                                 android:textColor="@color/color_white"
-                                android:textSize="@dimen/first_lanunch_weight_num_text_size" />
+                                android:textSize="@dimen/first_lanunch_weight_num_text_size"
+                                android:gravity="right" />
 
                             <TextView
                                 android:id="@+id/first_launch_height_unit_textview"
@@ -75,7 +75,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="4" >
 
-                <ScrollView
+                <com.inhand.milk.utils.ObservableScrollView
                     android:id="@+id/first_launch_height_scrollView"
                     android:layout_width="@dimen/first_lanunch_height_ruler_width"
                     android:layout_height="fill_parent"
@@ -89,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical" >
                     </LinearLayout>
-                </ScrollView>
+                </com.inhand.milk.utils.ObservableScrollView>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
 
                     <ImageView
                         android:id="@+id/first_launch_height_ruler_jt_ico"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/first_lanunch_weight_ruler_jt_height"
                         android:layout_height="wrap_content"
                         android:src="@drawable/first_launch_height_ruler_jt_ico" />
 
@@ -132,7 +132,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="bottom|right"
-                    android:layout_weight="6"
+                    android:layout_weight="4"
                     android:orientation="vertical" >
 
                     <ImageView

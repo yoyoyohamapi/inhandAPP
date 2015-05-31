@@ -1,26 +1,18 @@
 package com.inhand.milk.fragment.temperature_amount.details_once;
 
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.inhand.milk.R;
 import com.inhand.milk.entity.Record;
 import com.inhand.milk.fragment.TitleFragment;
 
-import android.R.string;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DetailsOnceFragment extends TitleFragment{
     Record record;
@@ -31,7 +23,7 @@ public class DetailsOnceFragment extends TitleFragment{
 		mView =  inflater.inflate(R.layout.temperature_amount_details_once, null);
         record=(Record)getArguments().getSerializable("record");
 		//setBack();
-		setTitleview(getString(R.string.details_once_title_string), 2);
+		setTitleview(getString(R.string.details_once_title_string), 2,null,null);
 		setInfo();
 		return mView;
 	}

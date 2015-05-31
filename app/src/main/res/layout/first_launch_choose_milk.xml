@@ -73,28 +73,10 @@
         android:gravity="center_horizontal" >
 
         <RelativeLayout
-            android:layout_width="@dimen/first_launch_milk_icons_container_width"
+            android:layout_width="fill_parent"
+            android:id = "@+id/first_launch_choose_milk_icons_container"
             android:layout_height="match_parent"
-          >
-
-            <ImageView
-                android:id="@+id/first_launch_choose_milk_brand_left_icon"
-                android:layout_width="@dimen/first_lanunch_milk_icon_width"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="false"
-                android:layout_alignParentTop="false"
-                android:scaleType="centerInside"
-                android:src="@drawable/first_launch_milkbrand_left_icon" />
-
-            <ImageView
-                android:id="@+id/first_launch_choose_milk_brand_right_icon"
-                android:layout_width="@dimen/first_lanunch_milk_icon_width"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="false"
-                android:scaleType="centerInside"
-                android:src="@drawable/first_launch_milkbrand_right_ico" />
+            >
 
         </RelativeLayout>
 

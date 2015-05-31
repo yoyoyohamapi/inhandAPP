@@ -1,14 +1,10 @@
 package com.inhand.milk.fragment.temperature_amount.details;
 
-import android.R.integer;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.AbsListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 

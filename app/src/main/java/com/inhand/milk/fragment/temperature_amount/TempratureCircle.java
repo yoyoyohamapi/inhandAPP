@@ -1,16 +1,15 @@
 package com.inhand.milk.fragment.temperature_amount;
 
-import com.inhand.milk.R;
-
-import android.R.integer;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.graphics.Paint.Style;
+import android.graphics.RectF;
 import android.os.Handler;
 import android.view.View;
+
+import com.inhand.milk.R;
 
 public class TempratureCircle extends View{
 	private float wr ;
@@ -136,7 +135,8 @@ public class TempratureCircle extends View{
 	
 	
 	public void start(){
-		handler = new Handler();
+        if (handler == null)
+		    handler = new Handler();
 		sweepAngle1 = 0;
 		score1 = 0;
 		score_float1 = 0 ;
