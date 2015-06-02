@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
-import com.avos.avoscloud.SaveCallback;
 import com.inhand.milk.App;
 import com.inhand.milk.dao.BabyDao;
 import com.inhand.milk.utils.ACache;
@@ -90,6 +89,7 @@ public class User extends AVUser {
         aCache.remove(App.BABY_CACHE_KEY);
         AVUser.logOut();
     }
+
 
 
 }

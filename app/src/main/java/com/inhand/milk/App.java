@@ -55,6 +55,8 @@ public class App extends Application {
     /**
      * 判断用户是否登陆
      * @return 登陆与否
+     *
+     *
      */
     public static boolean logged() {
         if (AVUser.getCurrentUser() == null)

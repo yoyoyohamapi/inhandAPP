@@ -291,6 +291,9 @@
     <dimen name="milk_amount_listview_item_circle_down_text_size">7dp</dimen>
     <dimen name="milk_amount_listview_item_circle_margin_right">10dp</dimen>
     <dimen name="milk_amount_listview_item_title_time_text_width">100dp</dimen>
+    <dimen name="health_last_drink_item_text_total_width">100dp</dimen>
+    <dimen name="health_last_drink_item_text_total_height">70dp</dimen>
+    <dimen name="last_drink_item_total_height">150dp</dimen>
     <array name="milk_amount_listview_item_title_circle_weights">
         <item>1</item>
         <item>1</item>

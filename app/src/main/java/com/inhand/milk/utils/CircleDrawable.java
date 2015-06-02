@@ -16,9 +16,9 @@ public class CircleDrawable extends Drawable {
         rr = 0;
         color = Color.WHITE;
     }
-    public  CircleDrawable(float r, int c) {
+    public  CircleDrawable(float r, int color) {
         rr =r;
-        color = c;
+        this.color = color;
     }
     @Override
     public void draw(Canvas canvas) {
