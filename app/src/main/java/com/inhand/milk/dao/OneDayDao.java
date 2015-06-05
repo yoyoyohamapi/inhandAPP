@@ -108,8 +108,8 @@ public class OneDayDao extends BaseDao {
 
 
     @Override
-    public void updateOrSaveInCloud(Base oneDay) throws AVException {
-        OneDay src = (OneDay) oneDay;
+    public void updateOrSaveInCloud(OneDay oneDay) throws AVException {
+        OneDay src =  oneDay;
         OneDay old = findOneDayFromCloud(src.getDate());
         if (old == null) {
             //不存在则新建
@@ -227,10 +227,9 @@ public class OneDayDao extends BaseDao {
     /**
      * 更新或者储存当天记录，无则更新，有则创建
      *
-     * @param src 传入的当天记录
+     * @param oneDay 传入的当天记录
      */
-    public void updateOrSaveInDB(Base src) {
-        OneDay oneDay = (OneDay) src;
+    public void updateOrSaveInDB(OneDay oneDay) {
         String date = oneDay.getDate();
         final String compStr = date + ":"
                 + App.getCurrentBaby().getObjectId();

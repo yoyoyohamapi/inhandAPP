@@ -15,7 +15,6 @@ import com.inhand.milk.entity.Record;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
 
 public class TemperatureDay extends OnePaper {
 

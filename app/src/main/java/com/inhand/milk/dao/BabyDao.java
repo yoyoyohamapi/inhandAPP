@@ -7,6 +7,7 @@ import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.inhand.milk.entity.Baby;
+import com.inhand.milk.entity.OneDay;
 
 import java.util.List;
 
@@ -23,6 +24,11 @@ public class BabyDao extends BaseDao {
 
     public BabyDao(Context ctx) {
         super(ctx);
+    }
+
+    @Override
+    void updateOrSaveInCloud(OneDay oneDay) throws AVException {
+
     }
 
     /**

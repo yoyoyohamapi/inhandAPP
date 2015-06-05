@@ -14,12 +14,16 @@ import com.avos.avoscloud.AVObject;
  * Time: 16:06
  */
 public class Base extends AVObject {
+    public static final String VERSION_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
     /**
      * 缓存异步存储任务
      */
     class CacheSavingTask extends AsyncTask {
         private final Context ctx;
         private final CacheSavingCallback cacheSavingCallback;
+
+
 
         CacheSavingTask(final Context ctx, final CacheSavingCallback cacheSavingCallback) {
             this.ctx = ctx;

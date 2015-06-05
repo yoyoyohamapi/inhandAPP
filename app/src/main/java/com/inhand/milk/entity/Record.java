@@ -24,11 +24,14 @@ public class Record implements Serializable{
     //温度(最低温度，最高温度)
     public static final String BEGIN_TEMPERATURE_KEY = "beginTemperature";
     public static final String END_TEMPERATURE_KEY = "endTemperature";
-    //喝奶时间
+    //日期
     public static final String BEGIN_TIME_KEY = "beginTime";
-    public static final String END_TIME_KEY = "endTime";
-    //关键点
-    public static final String KEY_POINTS_KEY = "keyPointsJSON";
+    //饮奶时间
+    public static final String DURATION_KEY = "duration";
+    //建议奶量
+    public static final String ADVICE_VOLUMN_KEY = "adviceVolumn";
+    //喝奶分数
+    public static final String SCORE_KEY = "score";
     //奶量
     private int volume;
     //温度(最低温度，最高温度)
@@ -36,9 +39,13 @@ public class Record implements Serializable{
     private float endTemperature;
     //喝奶时间
     private String beginTime;
-    private String endTime;
-    //关键点序列化
-    private JSONArray keyPointsJSON;
+    //喝奶时长
+    private int duration;
+    //喝奶评分
+    private int score;
+    //建议奶量
+    private int adviceVolumn;
+
     public Record() {
 
     }
@@ -75,39 +82,29 @@ public class Record implements Serializable{
         this.beginTime = beginTime;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
-    public List<KeyPoint> fetchKeyPoints() {
-        return JSON.parseArray(this.getKeyPointsJSON().toString(), KeyPoint.class);
-    }
-    public List<KeyPoint> getKeyPoints(){
-        return JSON.parseArray(this.keyPointsJSON.toString(), KeyPoint.class);
-    }
-    public JSONArray getKeyPointsJSON() {
-        return keyPointsJSON;
-    }
-    public void setKeyPointsJSON(List<KeyPoint> keyPoints) {
-        JSONArray array = new JSONArray();
-        for (KeyPoint keyPoint : keyPoints) {
-            JSONObject obj = new JSONObject();
-            try {
-                obj.put(KeyPoint.SCALE_KEY, keyPoint.getScale());
-                obj.put(KeyPoint.TEMPERATURE_KEY, keyPoint.getTemperature());
-                obj.put(KeyPoint.TIME_KEY, keyPoint.getTime());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            array.put(obj);
-        }
-        this.keyPointsJSON = array;
+    public int getScore() {
+        return score;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getAdviceVolumn() {
+        return adviceVolumn;
+    }
+
+    public void setAdviceVolumn(int adviceVolumn) {
+        this.adviceVolumn = adviceVolumn;
+    }
 
     /**
      * 根据饮奶的开始时间判断两次饮奶记录是否为
@@ -121,5 +118,25 @@ public class Record implements Serializable{
                 .equals(this.getBeginTime()))
             return true;
         return false;
+    }
+
+    /**
+     * 将Record对象转换为JSON
+     */
+    public JSONObject toJsonObj(){
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put(Record.VOLUME_KEY, this.getVolume());
+            obj.put(Record.BEGIN_TEMPERATURE_KEY, this.getBeginTemperature());
+            obj.put(Record.END_TEMPERATURE_KEY, this.getEndTemperature());
+            obj.put(Record.BEGIN_TIME_KEY, this.getBeginTime());
+            obj.put(Record.SCORE_KEY,this.getScore());
+            obj.put(Record.DURATION_KEY,this.getDuration());
+            obj.put(Record.ADVICE_VOLUMN_KEY,this.getAdviceVolumn());
+            return obj;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

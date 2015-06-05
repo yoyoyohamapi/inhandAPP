@@ -5,7 +5,10 @@ import android.content.Context;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.inhand.milk.entity.Baby;
+import com.inhand.milk.entity.Device;
 import com.inhand.milk.entity.OneDay;
+import com.inhand.milk.entity.Statistics;
+import com.inhand.milk.entity.Weight;
 
 /**
  * LeanCloudHelper
@@ -30,7 +33,10 @@ public class LeanCloudHelper {
 
     private static void registerSubclass() {
         AVObject.registerSubclass(OneDay.class);
+        AVObject.registerSubclass(Weight.class);
         AVObject.registerSubclass(Baby.class);
+        AVObject.registerSubclass(Device.class);
+        AVObject.registerSubclass(Statistics.class);
     }
 
     /**

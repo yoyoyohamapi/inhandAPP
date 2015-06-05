@@ -40,7 +40,6 @@ public class OneDay extends Base {
     public static final String BABY_KEY = "baby";
 
     public static final String DATE_FORMAT = "yyyy-MM-dd";
-    public static final String VERSION_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     public OneDay() {
 
@@ -63,17 +62,7 @@ public class OneDay extends Base {
     public void setRecords(List<Record> records) {
         JSONArray array = new JSONArray();
         for (Record record : records) {
-            JSONObject obj = new JSONObject();
-            try {
-                obj.put(Record.VOLUME_KEY, record.getVolume());
-                obj.put(Record.BEGIN_TEMPERATURE_KEY, record.getBeginTemperature());
-                obj.put(Record.END_TEMPERATURE_KEY, record.getEndTemperature());
-                obj.put(Record.BEGIN_TIME_KEY, record.getBeginTime());
-                obj.put(Record.END_TIME_KEY, record.getEndTime());
-                obj.put(Record.KEY_POINTS_KEY, record.getKeyPointsJSON());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            JSONObject obj = record.toJsonObj();
             array.put(obj);
         }
         this.put(RECORDS_KEY, array);
@@ -119,7 +108,7 @@ public class OneDay extends Base {
      * @param ctx   上下文环境
      * @param saveCallback 回调接口
      */
-    public void save(Context ctx, final SaveCallback saveCallback) {
+    public void saveInCloud(Context ctx, final SaveCallback saveCallback) {
         final OneDay day = this;
         //更新版本表示
         String version = day.getVersion();

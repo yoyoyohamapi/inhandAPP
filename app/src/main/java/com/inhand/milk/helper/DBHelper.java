@@ -93,6 +93,8 @@ public class DBHelper extends SQLiteOpenHelper {
      *
      * @param table 表名
      * @param obj   待插入对象
+     * @param version 版本
+     * @param comp 比较字段
      */
     public void insertToJson(String table, String obj, String version, String comp) {
         SQLiteDatabase db = this.openDatabase();

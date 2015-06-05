@@ -65,7 +65,6 @@ public class BabyInfoTestActivity extends BaseActivity {
                 final Baby baby = new Baby();
                 baby.setNickname(nickname);
                 baby.setHeight(height);
-                baby.setWeight(weight);
                 baby.setHeadSize(headSize);
                 baby.setBirthday(birthday);
                 //写入云端后缓存至本地

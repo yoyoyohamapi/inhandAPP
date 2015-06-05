@@ -5,11 +5,14 @@ import android.content.Context;
 import com.avos.avoscloud.AVClassName;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVRelation;
 import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.inhand.milk.App;
 import com.inhand.milk.dao.OneDayDao;
 import com.inhand.milk.utils.ACache;
+
+import java.util.List;
 
 
 /**
@@ -57,12 +60,40 @@ public class Baby extends Base {
         this.put(HEIGHT_KEY, height);
     }
 
-    public float getWeight() {
-        return this.getInt(WEIGHT_KEY);
+    /**
+     * 异步地获取宝宝体重列表
+     * @param callback 回调接口
+     */
+    public void getWeight(
+            final FindCallback<Weight> callback) {
+        AVRelation<Weight> relation =
+                this.getRelation(WEIGHT_KEY);
+        relation.getQuery().findInBackground(callback);
     }
 
-    public void setWeight(float weight) {
-        this.put(WEIGHT_KEY, weight);
+    /**
+     * 同步地获取宝宝体重列表
+     * @return 体重列表
+     */
+    public List<Weight> getWeight() {
+        AVRelation<Weight> relation =
+                this.getRelation(WEIGHT_KEY);
+        try {
+            return relation.getQuery().find();
+        } catch (AVException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 添加一条体重记录
+     * @param weight 待添加体重记录
+     */
+    public void addWeight(Weight weight) {
+        AVRelation<Weight> relation =
+                this.getRelation(WEIGHT_KEY);
+        relation.add(weight);
     }
 
     public float getHeadSize() {
@@ -79,6 +110,14 @@ public class Baby extends Base {
 
     public void setSex(int sex) {
         this.put(SEX_KEY, sex);
+    }
+
+    /**
+     * 获得当前宝宝所在账户
+     * @return 宝宝所在账户
+     */
+    public User getUser(){
+        return this.getAVUser(USER_KEY,User.class);
     }
 
     public void setUser(User user) {
@@ -106,11 +145,10 @@ public class Baby extends Base {
      * @param saveCallback    回调接口
      */
     public void save(final SaveCallback saveCallback) {
-        final Baby baby = this;
-        if (baby.getObjectId().length() == 0) {
-            baby.setUser(App.getCurrentUser());
+        if( this.getUser() == null ){
+            this.setUser(App.getCurrentUser());
         }
-        baby.saveInBackground(saveCallback);
+        this.saveInBackground(saveCallback);
     }
 
     /**
