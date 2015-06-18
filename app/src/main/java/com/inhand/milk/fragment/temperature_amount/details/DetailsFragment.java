@@ -14,7 +14,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.inhand.milk.R;
 import com.inhand.milk.dao.BaseDao;
 import com.inhand.milk.dao.OneDayDao;
-import com.inhand.milk.entity.KeyPoint;
 import com.inhand.milk.entity.OneDay;
 import com.inhand.milk.entity.Record;
 import com.inhand.milk.fragment.TitleFragment;
@@ -189,19 +188,13 @@ public class DetailsFragment  extends TitleFragment{
     public float getMinTemp(Record record) {
         float min_temp=record.getBeginTemperature();
         if (min_temp>record.getEndTemperature())min_temp=record.getEndTemperature();
-        for(KeyPoint keyPoint : record.getKeyPoints()){
-            if(min_temp>keyPoint.getTemperature())
-                min_temp=keyPoint.getTemperature();
-        }
+
         return min_temp;
     }
     public float getMaxTemp(Record record) {
         float max_temp=record.getBeginTemperature();
         if (max_temp<record.getEndTemperature())max_temp=record.getEndTemperature();
-        for(KeyPoint keyPoint : record.getKeyPoints()){
-            if(max_temp<keyPoint.getTemperature())
-                max_temp=keyPoint.getTemperature();
-        }
+
         return max_temp;
     }
 }

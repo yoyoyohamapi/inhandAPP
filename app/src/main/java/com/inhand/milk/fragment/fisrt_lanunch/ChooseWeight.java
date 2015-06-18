@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inhand.milk.R;
+import com.inhand.milk.entity.Weight;
 import com.inhand.milk.utils.ObservableHorizonScrollView;
 import com.inhand.milk.utils.firstlanunch.Ruler;
 
@@ -182,6 +183,10 @@ public class ChooseWeight extends FirstLaunchFragment{
      */
 	private void save(){
         Float weight=Float.valueOf(num.getText().toString());
-        baby.setWeight(weight);
+        int moonage=5;
+        Weight babyweight=new Weight();
+        babyweight.setMoonAge(moonage);
+        babyweight.setWeight(weight);
+        baby.addWeight(babyweight);
 	}
 }

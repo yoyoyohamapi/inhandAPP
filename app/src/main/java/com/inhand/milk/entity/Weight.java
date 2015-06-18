@@ -1,12 +1,14 @@
 package com.inhand.milk.entity;
 
 import com.avos.avoscloud.AVClassName;
+import com.avos.avoscloud.SaveCallback;
+import com.inhand.milk.App;
 
 import java.util.Date;
 
 /**
  * Weight
- * Desc: 体重实体
+ * Desc: 浣撻噸瀹炰綋
  * Date: 2015/6/2
  * Time: 23:43
  * Created by: Wooxxx
@@ -19,8 +21,8 @@ public class Weight extends Base {
     public static final String WEIGHT_KEY = "weight";
 
     /**
-     * 获得宝宝月龄
-     * @return 宝宝月龄
+     * 鑾峰緱瀹濆疂鏈堥緞
+     * @return 瀹濆疂鏈堥緞
      */
     public int getMoonAge(){
         return this.getInt(MOON_AGE_KEY);
@@ -31,15 +33,22 @@ public class Weight extends Base {
     }
 
     /**
-     * 获得宝宝体重
-     * @return 宝宝体重
+     * 鑾峰緱瀹濆疂浣撻噸
+     * @return 瀹濆疂浣撻噸
      */
     public int getWeight(){
         return this.getInt(WEIGHT_KEY);
     }
 
-    public void setWeight(int weight){
+    public void setWeight(float weight){
         this.put(WEIGHT_KEY,weight);
+    }
+    /**
+     * 瀛樺偍Weight瀵硅薄锛岃嫢宸插瓨鍦紝鍒欎负鏇存柊
+     * @param saveCallback    鍥炶皟鎺ュ彛
+     */
+    public void save(final SaveCallback saveCallback) {
+        this.saveInBackground(saveCallback);
     }
 
 }

@@ -26,7 +26,7 @@ public class BabyDao extends BaseDao {
         super(ctx);
     }
 
-    @Override
+
     void updateOrSaveInCloud(OneDay oneDay) throws AVException {
 
     }

@@ -20,7 +20,6 @@ import com.avos.avoscloud.FindCallback;
 import com.inhand.milk.App;
 import com.inhand.milk.R;
 import com.inhand.milk.entity.Base;
-import com.inhand.milk.entity.KeyPoint;
 import com.inhand.milk.entity.OneDay;
 import com.inhand.milk.entity.Record;
 import com.inhand.milk.helper.SyncHelper;
@@ -118,21 +117,9 @@ public class SyncTestActivity extends BaseActivity {
                 for (int i = 0; i < 1; i++) {
                     Record record = new Record();
                     record.setBeginTime(beginTime);
-                    record.setEndTime(endTime);
                     record.setBeginTemperature(beginTemperature + i * 2);
                     record.setEndTemperature(endTemperature + i * 2);
                     record.setVolume(volume);
-                    List<KeyPoint>keyPoints=new ArrayList<KeyPoint>();
-                    for(int j=0;j<5;j++){
-                        KeyPoint keyPoint=new KeyPoint();
-                        keyPoint.setScale(500+j);
-                        keyPoint.setTemperature(30+j);
-                        keyPoint.setTime(10+j);
-                        keyPoints.add(keyPoint);
-                    }
-                    record.setKeyPointsJSON(keyPoints);
-                    Log.d("KeyPointsJSON",record.getKeyPointsJSON().toString());
-
                     sumVolume += record.getVolume();
                     records.add(record);
                 }
@@ -249,9 +236,7 @@ public class SyncTestActivity extends BaseActivity {
             TextView maxTmpTxt = ViewHolder.get(convertView, R.id.begin_temperature_text);
             TextView volumeTxt = ViewHolder.get(convertView, R.id.volume_text);
             String beginTime = record.getBeginTime();
-            String endTime = record.getEndTime();
             beginTimeTxt.setText(beginTime);
-            endTimeTxt.setText(endTime);
             minTmpTxt.setText(String.valueOf(record.getEndTemperature()));
             maxTmpTxt.setText(String.valueOf(record.getBeginTemperature()));
             volumeTxt.setText(String.valueOf(record.getVolume()));

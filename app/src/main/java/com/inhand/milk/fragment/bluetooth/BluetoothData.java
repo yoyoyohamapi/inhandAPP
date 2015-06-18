@@ -115,7 +115,6 @@ public class BluetoothData {
     private void setRecordTime(Record record,float continuTime,float interva ){
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE, -(int) interva);
-        record.setEndTime(simpleDateFormat.format(calendar.getTime()));
         calendar.add(Calendar.MINUTE, -(int)continuTime);
         record.setBeginTime(simpleDateFormat.format(calendar.getTime()));
     }

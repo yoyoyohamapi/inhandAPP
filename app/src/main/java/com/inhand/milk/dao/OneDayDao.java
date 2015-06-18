@@ -43,7 +43,12 @@ public class OneDayDao extends BaseDao {
     }
 
 
-    @Override
+    /**
+     * 异步地根据从云端获取所有记录
+     *
+     * @param limit     最大条数
+     * @param callback 回调函数
+     */
     public void findAllFromCloud(int limit, FindCallback callback) {
         query = AVQuery.getQuery(OneDay.class);
         // 按照更新时间降序排序
@@ -55,7 +60,11 @@ public class OneDayDao extends BaseDao {
         query.findInBackground(callback);
     }
 
-    @Override
+    /**
+     * 异步地根据日期从云端获取所有记录
+     *
+     * @param limit 最大条数
+     */
     public List<OneDay> findAllFromCloud(int limit) {
         query = AVQuery.getQuery(OneDay.class);
         List<OneDay> oneDays = new ArrayList<>();
@@ -107,7 +116,11 @@ public class OneDayDao extends BaseDao {
     }
 
 
-    @Override
+    /**
+     * 在云端更新或存储记录
+     *
+     * @param oneDay
+     */
     public void updateOrSaveInCloud(OneDay oneDay) throws AVException {
         OneDay src =  oneDay;
         OneDay old = findOneDayFromCloud(src.getDate());

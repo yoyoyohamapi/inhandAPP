@@ -130,9 +130,7 @@ public class ChooseMilk extends FirstLaunchFragment {
             @Override
             public void onAnimationEnd(Animation animation) {
                 // TODO Auto-generated method stub
-                enterNextActivity();
                 save();
-                getActivity().finish();
             }
         });
     }
@@ -141,7 +139,7 @@ public class ChooseMilk extends FirstLaunchFragment {
         Intent intent  = new Intent();
         intent.setClass(getActivity(), MainActivity.class);
         getActivity().startActivity(intent);
-        //getActivity().finish();
+        getActivity().finish();
     }
 
 
@@ -168,8 +166,6 @@ public class ChooseMilk extends FirstLaunchFragment {
         });
     }
     private void save(){
-        enterNextActivity();
-        /*
         baby.save(new SaveCallback() {
             @Override
             public void done(AVException e) {
@@ -187,6 +183,5 @@ public class ChooseMilk extends FirstLaunchFragment {
                 }
             }
         });
-        */
     }
 }
