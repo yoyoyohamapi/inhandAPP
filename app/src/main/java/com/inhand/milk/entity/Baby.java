@@ -29,7 +29,7 @@ public class Baby extends Base {
     public static final String NICKNAME_KEY = "nickname";
     public static final String BIRTHDAY_KEY = "birthday";
     public static final String HEIGHT_KEY = "height";
-    public static final String WEIGHT_KEY = "weight";
+    public static final String WEIGHT_KEY = "weights";
     public static final String HEAD_SIZE_KEY = "head_size";
     public static final String USER_KEY = "user";
     public static final String SEX_KEY = "sex";

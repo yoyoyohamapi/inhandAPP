@@ -15,7 +15,7 @@ import java.util.Date;
 
 /**
  * Device
- * Desc: Éè±¸ÊµÌå
+ * Desc: è®¾å¤‡å®ä½“
  * Date: 2015/6/2
  * Time: 23:43
  * Created by: Wooxxx
@@ -40,8 +40,8 @@ public class Device extends Base {
     }
 
     /**
-     * »ñµÃÉè±¸MACµØÖ·
-     * @return MACµØÖ·
+     * è·å¾—è®¾å¤‡MACåœ°å€
+     * @return MACåœ°å€
      */
     public String getMac(){
         return this.getString(MAC_KEY);
@@ -52,8 +52,8 @@ public class Device extends Base {
     }
 
     /**
-     * »ñµÃÉè±¸Èí¼ş°æ±¾
-     * @return Èí¼ş°æ±¾
+     * è·å¾—è®¾å¤‡è½¯ä»¶ç‰ˆæœ¬
+     * @return è½¯ä»¶ç‰ˆæœ¬
      */
     public String getSoftwareVersion(){
         return this.getString(SOFTWARE_VERSION_KEY);
@@ -64,8 +64,8 @@ public class Device extends Base {
     }
 
     /**
-     * »ñµÃÉè±¸Ó²¼ş°æ±¾
-     * @return Éè±¸Ó²¼ş°æ±¾
+     * è·å¾—è®¾å¤‡ç¡¬ä»¶ç‰ˆæœ¬
+     * @return è®¾å¤‡ç¡¬ä»¶ç‰ˆæœ¬
      */
     public String getHardwareVersion(){
         return this.getString(HARDWARE_VERSION_KEY);
@@ -76,8 +76,8 @@ public class Device extends Base {
     }
 
     /**
-     * »ñµÃĞ£×¼´ÎÊı
-     * @return Ğ£×¼´ÎÊı
+     * è·å¾—æ ¡å‡†æ¬¡æ•°
+     * @return æ ¡å‡†æ¬¡æ•°
      */
     public int getAdjustNum(){
         return this.getInt(ADJUST_NUM_KEY);
@@ -88,20 +88,20 @@ public class Device extends Base {
     }
 
     /**
-     * »ñµÃĞ£×¼²î
-     * @return Ğ£×¼²î
+     * è·å¾—æ ¡å‡†å·®
+     * @return æ ¡å‡†å·®
      */
     public double getAdjustDeviation(){
         return this.getDouble(ADJUST_DEVIATION_KEY);
     }
 
-    public void setAdjustNumDeviation(double adjustNumDeviation){
+    public void setAdjustDeviation(double adjustNumDeviation){
         this.put(ADJUST_DEVIATION_KEY,adjustNumDeviation);
     }
 
     /**
-     * »ñµÃÑ¹Á¦´«¸Ğ´íÎó´ÎÊı
-     * @return Ñ¹Á¦´«¸Ğ´íÎó´ÎÊı
+     * è·å¾—å‹åŠ›ä¼ æ„Ÿé”™è¯¯æ¬¡æ•°
+     * @return å‹åŠ›ä¼ æ„Ÿé”™è¯¯æ¬¡æ•°
      */
     public int getPressureErrorNum(){
         return this.getInt(PRESSURE_ERROR_NUM_KEY);
@@ -112,20 +112,20 @@ public class Device extends Base {
     }
 
     /**
-     * »ñµÃÎÂ¶È´íÎó´ÎÊı
-     * @return ÎÂ¶È´íÎó´ÎÊı
+     * è·å¾—æ¸©åº¦é”™è¯¯æ¬¡æ•°
+     * @return æ¸©åº¦é”™è¯¯æ¬¡æ•°
      */
     public int getTemperatureErrorNum(){
         return this.getInt(TEMPERATURE_ERROR_NUM_KEY);
     }
 
-    public void setTemperatureErrorNumKey(int temperatureErrorNum){
+    public void setTemperatureErrorNum(int temperatureErrorNum){
         this.put(TEMPERATURE_ERROR_NUM_KEY,temperatureErrorNum);
     }
 
     /**
-     * »ñµÃ¼ÓËÙ¶ÈÄ£¿é´íÎó´ÎÊı
-     * @return ¼ÓËÙ¶ÈÄ£¿é´íÎó´ÎÊı
+     * è·å¾—åŠ é€Ÿåº¦æ¨¡å—é”™è¯¯æ¬¡æ•°
+     * @return åŠ é€Ÿåº¦æ¨¡å—é”™è¯¯æ¬¡æ•°
      */
     public int getAccelerateErrorNum(){
         return this.getInt(ACCELERATE_ERROR_NUM_KEY);
@@ -136,8 +136,8 @@ public class Device extends Base {
     }
 
     /**
-     * »ñµÃµ±Ç°Êı¾İ¼ÇÂ¼°æ±¾
-     * @return °æ±¾ºÅ
+     * è·å¾—å½“å‰æ•°æ®è®°å½•ç‰ˆæœ¬
+     * @return ç‰ˆæœ¬å·
      */
     public String getVersion(){
         return this.getString(VERSION_KEY);
@@ -150,9 +150,10 @@ public class Device extends Base {
     public User getUser(){
         return this.getAVUser(USER_KEY,User.class);
     }
+
     /**
-     * ÉèÖÃÉè±¸¶ÔÓ¦ÓÃ»§
-     * @param user ÓÃ»§
+     * è®¾ç½®è®¾å¤‡å¯¹åº”ç”¨æˆ·
+     * @param user ç”¨æˆ·
      */
     public void setUser(User user) {
         try {
@@ -162,15 +163,15 @@ public class Device extends Base {
         }
     }
     /**
-     * ±£´æÉè±¸ĞÅÏ¢ÖÁÔÆ¶Ë
-     * @param callback ´æ´¢»Øµ÷½Ó¿Ú
-     * @param ctx ÉÏÏÂÎÄ»·¾³
+     * ä¿å­˜è®¾å¤‡ä¿¡æ¯è‡³äº‘ç«¯
+     * @param callback å­˜å‚¨å›è°ƒæ¥å£
+     * @param ctx ä¸Šä¸‹æ–‡ç¯å¢ƒ
      */
     public void saveInCloud(Context ctx,final SaveCallback callback){
         final Device  device = this;
         if( device.getUser() == null )
             device.setUser(App.getCurrentUser());
-        //¸üĞÂ°æ±¾±íÊ¾
+        //???Â°æ±¾???
         SimpleDateFormat sdf = new SimpleDateFormat(VERSION_FORMAT);
         String version = sdf.format(new Date());
         device.setVersion(version);
@@ -178,21 +179,21 @@ public class Device extends Base {
     }
 
     /**
-     * ±£´æÉè±¸ĞÅÏ¢ÖÁ±¾µØ
-     * @param ctx ÉÏÏÂÎÄ»·¾³
-     * @param callback ´æ´¢»Øµ÷½Ó¿Ú
+     * ä¿å­˜è®¾å¤‡ä¿¡æ¯è‡³æœ¬åœ°
+     * @param ctx ä¸Šä¸‹æ–‡ç¯å¢ƒ
+     * @param callback å­˜å‚¨å›è°ƒæ¥å£
      */
-    public void saveInDB(Context ctx,final DBSavingCallback callback){
+    public void saveInDB(final Context ctx,final DBSavingCallback callback){
         if( this.getUser() == null )
             this.setUser(App.getCurrentUser());
-        //¸üĞÂ°æ±¾±íÊ¾
+        //æ›´æ–°ç‰ˆæœ¬è¡¨ç¤º
         SimpleDateFormat sdf = new SimpleDateFormat(VERSION_FORMAT);
         String version = sdf.format(new Date());
         this.setVersion(version);
         DBSavingTask task = new DBSavingTask(ctx, callback) {
             @Override
             protected Object doInBackground(Object[] params) {
-                //¸üĞÂ±¾µØÊı¾İ¿â
+                //æ›´æ–°æœ¬åœ°æ•°æ®åº“
                 DeviceDao deviceDao = new DeviceDao(ctx);
                 deviceDao.updateOrSaveInDB(Device.this);
                 return null;

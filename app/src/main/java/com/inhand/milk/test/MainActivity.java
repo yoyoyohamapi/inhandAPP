@@ -7,7 +7,7 @@ import com.inhand.milk.R;
 
 /**
  * MainActivity
- * Desc: ²âÊÔÖ÷Ò³Ãæ
+ * Desc: æµ‹è¯•ä¸»é¡µé¢
  * Date: 2015/6/3
  * Time: 8:11
  * Created by: Wooxxx

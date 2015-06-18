@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * DaoInterface
- * Desc: Êı¾İ·ÃÎÊ²ã½Ó¿Ú
+ * Desc: æ•°æ®è®¿é—®å±‚æ¥å£
  * Date: 2015/6/5
  * Time: 7:31
  * Created by: Wooxxx
@@ -18,3 +18,4 @@ public interface DaoInterface <T extends Base>{
 
 
 }
+

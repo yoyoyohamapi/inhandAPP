@@ -8,7 +8,6 @@ import java.util.List;
 import com.inhand.milk.R;
 import com.inhand.milk.dao.BaseDao;
 import com.inhand.milk.dao.OneDayDao;
-import com.inhand.milk.entity.KeyPoint;
 import com.inhand.milk.entity.OneDay;
 import com.inhand.milk.entity.Record;
 

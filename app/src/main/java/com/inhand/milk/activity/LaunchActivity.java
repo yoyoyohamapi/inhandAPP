@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.inhand.milk.R;
+import com.inhand.milk.entity.Statistics;
 import com.inhand.milk.fragment.LoginOptFragment;
+import com.inhand.milk.test.DeviceTestActivity;
+import com.inhand.milk.test.StatisticsTestActivity;
 
 /**
  * LaunchActivity
@@ -21,10 +24,10 @@ public class LaunchActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
-//        this.startActivity(new Intent(this,SyncTestActivity.class));
+         this.startActivity(new Intent(this,BabyInfoTestActivity.class));
 
-        getSupportFragmentManager().beginTransaction()
-               .replace(R.id.main_container, new LoginOptFragment()).commit();
+//       getSupportFragmentManager().beginTransaction()
+//              .replace(R.id.main_container, new LoginOptFragment()).commit();
 
     }
 }

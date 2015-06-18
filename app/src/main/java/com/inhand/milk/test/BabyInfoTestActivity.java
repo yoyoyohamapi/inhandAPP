@@ -7,7 +7,7 @@ import com.inhand.milk.R;
 
 /**
  * BabyInfoTestActivity
- * Desc: ±¦±¦ĞÅÏ¢²âÊÔ
+ * Desc: å®å®ä¿¡æ¯æµ‹è¯•
  * Date: 2015/6/3
  * Time: 8:10
  * Created by: Wooxxx

@@ -80,7 +80,7 @@ public class DetailsOnceFragment extends TitleFragment{
     private String getEndTime(){
         Date date=new Date();
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        String string = sdf.format(date)+" "+record.getEndTime();;
+        String string = "";
         return string;
     }
     private String getHealthNum(){

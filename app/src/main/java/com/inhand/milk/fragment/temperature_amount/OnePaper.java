@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.inhand.milk.R;
 import com.inhand.milk.activity.StaticsDetailsActivity;
-import com.inhand.milk.entity.KeyPoint;
 import com.inhand.milk.entity.OneDay;
 import com.inhand.milk.entity.Record;
 
@@ -112,19 +111,13 @@ private OnClickListener onClickListener = new OnClickListener() {
     public float getMinTemp(Record record) {
         float min_temp=record.getBeginTemperature();
         if (min_temp>record.getEndTemperature())min_temp=record.getEndTemperature();
-        for(KeyPoint keyPoint : record.getKeyPoints()){
-            if(min_temp>keyPoint.getTemperature())
-                min_temp=keyPoint.getTemperature();
-        }
+
         return min_temp;
     }
     public float getMaxTemp(Record record) {
         float max_temp=record.getBeginTemperature();
         if (max_temp<record.getEndTemperature())max_temp=record.getEndTemperature();
-        for(KeyPoint keyPoint : record.getKeyPoints()){
-            if(max_temp<keyPoint.getTemperature())
-                max_temp=keyPoint.getTemperature();
-        }
+
         return max_temp;
     }
 	public float getMaxTemp(OneDay oneDay){
@@ -134,10 +127,7 @@ private OnClickListener onClickListener = new OnClickListener() {
                 max_temp=record.getBeginTemperature();
             if (max_temp<record.getEndTemperature())
                 max_temp=record.getEndTemperature();
-            for(KeyPoint keyPoint : record.getKeyPoints()){
-                if(max_temp<keyPoint.getTemperature())
-                    max_temp=keyPoint.getTemperature();
-            }
+
         }
         return max_temp;
     }
@@ -148,10 +138,7 @@ private OnClickListener onClickListener = new OnClickListener() {
                 min_temp=record.getBeginTemperature();
             if (min_temp>record.getEndTemperature())
                 min_temp=record.getEndTemperature();
-            for(KeyPoint keyPoint : record.getKeyPoints()){
-                if(min_temp>keyPoint.getTemperature())
-                    min_temp=keyPoint.getTemperature();
-            }
+
         }
         return min_temp;
     }

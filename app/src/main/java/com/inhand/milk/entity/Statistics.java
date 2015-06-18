@@ -113,7 +113,7 @@ public class Statistics extends Base {
      * @param ctx 上下文环境
      * @param callback 存储回调接口
      */
-    public void saveInDB(Context ctx,final DBSavingCallback callback){
+    public void saveInDB(final Context ctx,final DBSavingCallback callback){
         if( this.getBaby()==null){
             this.setBaby(App.getCurrentBaby());
         }
@@ -125,8 +125,8 @@ public class Statistics extends Base {
             @Override
             protected Object doInBackground(Object[] params) {
                 //更新本地数据库
-                StatisticsDao deviceDao = new StatisticsDao(ctx);
-                deviceDao.updateOrSaveInDB(Statistics.this);
+                StatisticsDao statisticsDao = new StatisticsDao(ctx);
+                statisticsDao.updateOrSaveInDB(Statistics.this);
                 return null;
             }
         };
